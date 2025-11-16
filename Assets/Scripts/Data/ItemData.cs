@@ -84,7 +84,7 @@ public class ItemData : ScriptableObject
     public int maxUpgrade = 10;
 
     [Tooltip("최대 성장 수치")]
-    public int maxGrowing = 40;
+    public int maxGrowth = 40;
 
 
     [Header("--- 무기 전용 설정 (Weapon 슬롯만 적용) ---")]

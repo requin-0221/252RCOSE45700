@@ -359,6 +359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 350219388}
   - component: {fileID: 350219389}
+  - component: {fileID: 350219390}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -383,7 +384,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 512}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &350219389
 MonoBehaviour:
@@ -409,6 +410,20 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 8
+--- !u!114 &350219390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350219387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &363411786
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,9 +459,9 @@ RectTransform:
   - {fileID: 1940254894}
   m_Father: {fileID: 1374034070}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 32, y: -32}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -528, y: 448}
   m_SizeDelta: {x: 1056, y: 512}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &363411788
@@ -468,7 +483,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 6
   m_Viewport: {fileID: 1584226180}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1940254895}
@@ -492,7 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1243,6 +1258,7 @@ GameObject:
   - component: {fileID: 1374034070}
   - component: {fileID: 1374034072}
   - component: {fileID: 1374034071}
+  - component: {fileID: 1374034073}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -1308,6 +1324,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374034069}
   m_CullTransparentMesh: 1
+--- !u!114 &1374034073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374034069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd3eaac71255db340ac16cc0591056de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
+  content: {fileID: 350219388}
+  slot: {fileID: 3011882181784554032, guid: 8e7c29890627698459e8cf7eb43db9a4, type: 3}
+  minSlots: 36
+  slotsPerRow: 8
 --- !u!1 &1392685199
 GameObject:
   m_ObjectHideFlags: 0
