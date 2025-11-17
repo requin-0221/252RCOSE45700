@@ -15,11 +15,11 @@ MonoBehaviour:
   itemName: "\uC5F0\uC2B5\uC6A9 \uAC80"
   description: "\uAC80\uC220 \uD6C8\uB828\uC5D0 \uC0AC\uC6A9\uB418\uB294 \uAE30\uBCF8\uC801\uC778
     \uAC80"
-  icon: {fileID: 0}
+  icon: {fileID: 8933965279069921549, guid: 4a8ef4ec069a081479e7ffb37f78780a, type: 3}
   equipSlot: 1
   itemTier: 1
   maxUpgrade: 10
-  maxGrowing: 40
+  maxGrowth: 40
   attackType: 0
   baseMaxHp: 500
   baseDef: 50
