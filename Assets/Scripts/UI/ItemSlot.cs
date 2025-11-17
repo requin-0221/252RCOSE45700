@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // TextMeshPro를 쓴다면
+using TMPro;
 
 public class ItemSlot : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class ItemSlot : MonoBehaviour
     public TextMeshProUGUI growthText;  // 성장 강화 레벨
     public Button slotButton;
 
-    private ItemInstance _item; // 이 슬롯이 담고 있는 아이템 데이터
+    private ItemInstance _item; // 슬롯 아이템 데이터
 
     // 초기화 (InventoryUI가 호출)
     public void SetItem(ItemInstance item)
@@ -28,9 +28,18 @@ public class ItemSlot : MonoBehaviour
         }
 
         if (item.data.equipSlot != EquipSlot.None)
-            upgradeText.text = $"+{item.upgradeLv}"; // 장비: +1, +2...
+        {
+            if (item.upgradeLv == 0) upgradeText.text = null;
+            else upgradeText.text = $"+{item.upgradeLv}";
+
+            if (item.growthLv == 0) growthText.text = null;
+            else growthText.text = $"+{item.growthLv}";
+        }
         else
-            growthText.text = $"+{item.growthLv}"; // 예시
+        {
+            upgradeText.text = null;
+            growthText.text = null;
+        }
 
         slotButton.onClick.RemoveAllListeners(); // 재사용 시 중복 방지
         slotButton.onClick.AddListener(OnSlotClicked);

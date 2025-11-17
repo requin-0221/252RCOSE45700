@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum EquipSlot // 장비 슬롯
@@ -56,6 +57,13 @@ public enum StatType
     SkillDmgStar          // 스킬 강화 ★
 }
 
+[System.Serializable]
+public struct StatData
+{
+    public StatType statType;
+    public float value;
+}
+
 [CreateAssetMenu(fileName = "ItemData", menuName = "Scripts/Data/ItemData")]
 public class ItemData : ScriptableObject
 {
@@ -93,37 +101,15 @@ public class ItemData : ScriptableObject
 
 
     [Header("--- 장비 기본 스탯 ---")]
-    public int baseMaxHp;           // 기본 체력
-    public int baseDef;             // 기본 방어력
-    public int basePAtk;            // 기본 물리 공격력
-    public int baseMAtk;            // 기본 마법 공격력
+    public List<StatData> baseStats;
 
-
-    [Header("--- 퍼센트 스탯 (0.1 = 10%) ---")]
-    [Tooltip("공격 관련")]
-    [Range(0f, 1f)] public float basePAtkPercent;   // 물리 공격력 %
-    [Range(0f, 1f)] public float baseMAtkPercent;   // 마법 공격력 %
-    [Range(0f, 1f)] public float basePDmgPercent;   // 물리 피해량 %
-    [Range(0f, 1f)] public float baseMDmgPercent;   // 마법 피해량 %
-    [Range(0f, 1f)] public float baseDmgPercent;    // 추가 피해량 %
-    [Range(0f, 1f)] public float baseCriDmgPercent; // 치명타 피해량 %
-    [Range(0f, 1f)] public float baseAtkSpdPercent; // 공격 속도 %
-
-    [Tooltip("방어/유틸 관련")]
-    [Range(0f, 1f)] public float baseDefPercent;        // 방어력 %
-    [Range(0f, 1f)] public float baseMaxHpPercent;      // 체력 %
-    [Range(0f, 1f)] public float baseSkillGainPercent;  // 스킬 자원 획득 % (모자)
-
-    [Tooltip("파밍 관련")]
-    [Range(0f, 1f)] public float baseItemDropPercent;   // 아이템 획득 확률 %
-    [Range(0f, 1f)] public float baseGoldDropPercent;   // 재화 획득 확률 %
-
-
-    [Header("--- ★ 수치 (Star) ---")]
-    [Tooltip("치명타 확률 ★")]
-    public float baseCriRateStar;
-    [Tooltip("방어 관통 ★")]
-    public float baseDefPntrStar;
-    [Tooltip("스킬 강화 ★")]
-    public float baseSkillDmgStar;
+    public float GetBaseStatValue(StatType type)
+    {
+        foreach (var stat in baseStats)
+        {
+            if (stat.statType == type)
+                return stat.value;
+        }
+        return 0f;
+    }
 }

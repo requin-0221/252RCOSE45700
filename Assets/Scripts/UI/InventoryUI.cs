@@ -6,8 +6,8 @@ public class InventoryUI : MonoBehaviour
     public Transform content; // ScrollView의 Content
     public GameObject slot;   // 슬롯 프리팹
 
-    public int minSlots = 36;       // 기본 슬롯 개수 (36)
-    public int slotsPerRow = 6;     // 한 줄당 슬롯 개수 (6)
+    public int minSlots = 40;       // 기본 슬롯 개수 (40)
+    public int slotsPerRow = 8;     // 한 줄당 슬롯 개수 (8)
 
     // 슬롯 재사용 리스트
     private List<ItemSlot> slots = new List<ItemSlot>();
@@ -24,11 +24,6 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        foreach (Transform child in content)
-        {
-            Destroy(child.gameObject);
-        }
-
         // GameManager에서 인벤토리 데이터 가져오기
         List<ItemInstance> inventoryList = GameManager.Instance.inventory;
 

@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
     // Singleton
     public static GameManager Instance;
 
+    [Header("테스트용")]
+    public ItemData testitem;
+
     private void Awake()
     {
         if (Instance == null)
@@ -24,7 +27,7 @@ public class GameManager : MonoBehaviour
     [Header("Resources")]
     public long gold { get; private set; } = 0;
     const long maxGold = 999999999999;
-    public int stones = 0; // 강화 재료
+    public int stones { get; private set; } = 0; // 강화 재료
     const int maxStones = 9999999;
 
     [Header("Inventory")]
@@ -47,6 +50,11 @@ public class GameManager : MonoBehaviour
         stones = 50;
 
         Debug.Log("GameManager Initialized.");
+
+        for(int i = 0; i < 50; i++)
+        {
+            AddItem(testitem);
+        }
     }
 
     // --- 편의 기능: 아이템 획득 ---
