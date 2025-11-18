@@ -17,7 +17,7 @@ public class ItemInstance
     public Dictionary<StatType, int> growthStacks;
 
     // 능력치
-    private readonly int statArraySize; // StatType 열거형의 총 개수
+    private readonly int statNum; // StatType 열거형의 총 개수
 
     public float[] baseStats;       // 기본 스탯 (ItemData)
     public float[] upgradeStats;    // 강화 증가치
@@ -32,29 +32,25 @@ public class ItemInstance
         this.upgradeLv = 0;
         this.growthLv = 0;
         this.growthStacks = new Dictionary<StatType, int>();
-        statArraySize = Enum.GetNames(typeof(StatType)).Length;
+        statNum = Enum.GetNames(typeof(StatType)).Length;
 
-        baseStats = new float[statArraySize];
-        upgradeStats = new float[statArraySize];
-        growthStats = new float[statArraySize];
-        totalStats = new float[statArraySize];
+        baseStats = new float[statNum];
+        upgradeStats = new float[statNum];
+        growthStats = new float[statNum];
+        totalStats = new float[statNum];
 
         calculateStats();
     }
 
     public void calculateStats()
     {
-        // 모든 StatType을 0부터 끝까지 순회
-        for (int i = 0; i < statArraySize; i++)
+        for (int i = 0; i < statNum; i++)
         {
             StatType type = (StatType)i; // 정수를 다시 Enum 타입으로 변환
 
-            // 2. 각 배열의 값을 채움
             baseStats[i] = data.GetBaseStatValue(type);
             upgradeStats[i] = 100;
             growthStats[i] = 100;
-
-            // 3. 최종 총합 계산
             totalStats[i] = baseStats[i] + upgradeStats[i] + growthStats[i];
         }
     }

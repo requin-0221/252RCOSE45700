@@ -53,6 +53,9 @@ public class ItemSlot : MonoBehaviour
         iconImage.enabled = false; // 아이콘 숨김 (배경만 보임)
         upgradeText.enabled = false;
         growthText.enabled = false;
+
+        slotButton.onClick.RemoveAllListeners(); // 재사용 시 중복 방지
+        slotButton.onClick.AddListener(OnEmptySlotClicked);
     }
 
     void OnSlotClicked()
@@ -60,7 +63,18 @@ public class ItemSlot : MonoBehaviour
         // 아이템 클릭 시 상세 팝업을 띄우거나, 장착 로직 호출
         Debug.Log($"클릭한 아이템: {_item.data.itemName}");
 
-        // 예: UIManager에게 "이 아이템 상세창 띄워줘"라고 요청
-        // UIManager.Instance.ShowItemDetail(_item);
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.ShowItemInfo(_item);
+        }
+    }
+
+    private void OnEmptySlotClicked()
+    {
+        // "빈 슬롯(-Empty Slot-)"을 표시하기 위해 null을 전달
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.ShowItemInfo(null);
+        }
     }
 }

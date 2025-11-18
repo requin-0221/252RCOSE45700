@@ -1,7 +1,22 @@
+using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System.Collections.Generic;
+
+[System.Serializable]
+public struct StatName
+{
+    public StatType statType;
+    public string name;
+}
+
+[System.Serializable]
+public struct EquipSlotName
+{
+    public EquipSlot equipSlot;
+    public string name;
+}
 
 public class Iteminfo : MonoBehaviour
 {
@@ -14,15 +29,31 @@ public class Iteminfo : MonoBehaviour
     public TextMeshProUGUI itemTierText;
 
     [Header("Status field")]
-    public Transform container; // Content
+    public Transform container; // Container
     public GameObject statLine; // StatLine Prefab
+    public int row; // # of Container element
+    public int col;
+    [SerializeField] List<GameObject> statLines;
+
+    [Header("StatType Name List")]
+    public List<StatName> statNames;
+
+    [Header("EquipSlot Name List")]
+    [SerializeField] List<EquipSlotName> equipSlotNames;
 
     public void Start()
     {
-        emptyText.gameObject.SetActive(false);
+        for (int i = 0; i < row * col; i++)
+        {
+            GameObject lineObj = Instantiate(statLine, container);
+            lineObj.GetComponent<TextMeshProUGUI>().text = null;
+            statLines.Add(lineObj);
+        }
+
+        ShowEmpty();
     }
 
-    public void UpdatePanel(ItemInstance item)
+    public void UpdateInfo(ItemInstance item)
     {
         if (item == null)
         {
@@ -48,37 +79,106 @@ public class Iteminfo : MonoBehaviour
 
         // 아이템 정보 업데이트
         itemNameText.text = item.data.itemName;
+        itemLevelText.text = $"<color=#FF7F00>+{item.upgradeLv}</color> / <color=#00DFFF>+{item.growthLv}</color>";
         itemTierText.text = $"Tier {item.data.itemTier}";
-        itemLevelText.text = $"+{item.upgradeLv} / +{item.growthLv}";
 
-        // 스탯 라인 컨테이너
-        foreach (Transform child in container)
+        UpdateStatLine(item);
+    }
+
+    void UpdateStatLine(ItemInstance item)
+    {
+        int lineIdx = 0;
+        string temp = null;
+        // 1번 열
+        SetLineText(lineIdx++, "장비 분류 : " + GetEquipSlotName(item.data.equipSlot));
+        if (item.data.equipSlot == EquipSlot.Weapon)
         {
-            Destroy(child.gameObject);
+            string attackType = item.data.attackType == AttackType.Physical ? "물리" : "마법";
+            SetLineText(lineIdx++, "공격 유형 : " + attackType);
+
+            temp = GetStatInfoText(item, StatType.AtkSpdPercent);
+            if (temp != null)
+                SetLineText(lineIdx++, GetStatInfoText(item, StatType.AtkSpdPercent)); // 공격 속도
+        }
+        // 단순 수치들 (HP, 방어력, 물리 공격력, 마법 공격력)
+        for (int i = 1; i <= 7; i++)
+        {
+            temp = GetStatInfoText(item, (StatType)i);
+            if (temp == null) continue;
+            SetLineText(lineIdx++, temp);
+        }
+        if (lineIdx < row) lineIdx = row;
+
+        // 2번 열
+        for (int i = 8; i < Enum.GetNames(typeof(StatType)).Length; i++)
+        {
+            temp = GetStatInfoText(item, (StatType)i);
+            if (temp == null) continue;
+            SetLineText(lineIdx++, GetStatInfoText(item, (StatType)i));
+        }
+    }
+
+    void SetLineText(int i, string t)
+    {
+        statLines[i].GetComponent<TextMeshProUGUI>().text = t;
+        return;
+    }
+
+    string GetStatInfoText(ItemInstance item, StatType type)
+    {
+        int i = (int)type;
+        // 수치가 없는 능력치는 스킵
+        if (item.totalStats[i] <= 0f) return null;
+
+        // 스탯 이름
+        string t = GetStatTypeName(type);
+        if (t == null) return "(Error)";
+        t += " : ";
+
+        // Total_Stat(+Upgrade_Stat+Growth_Stat) 포맷
+        string upgradeStr, growthStr, totalStr;
+        string typeName = type.ToString(); // "PhysicalAttack", "CritDamagePercent"
+
+        if (typeName.EndsWith("Percent"))
+        {
+            string format = "F0"; // 소수점 없음
+            //baseStr = (item.baseStats[i] * 100).ToString(format) + "%";
+            upgradeStr = (item.upgradeStats[i]).ToString(format) + "%";
+            growthStr = (item.growthStats[i]).ToString(format) + "%";
+            totalStr = (item.totalStats[i]).ToString(format) + "%";
+        }
+        else
+        {
+            string format = "F0"; // 소수점 없음
+            //baseStr = item.baseStats[i].ToString(format);
+            upgradeStr = item.upgradeStats[i].ToString(format);
+            growthStr = item.growthStats[i].ToString(format);
+            totalStr = item.totalStats[i].ToString(format);
         }
 
-        AddStatLine("장비 유형", (int)item.data.equipSlot);
-        AddStatLine("최대 HP", item.)
+        t += $"+{totalStr}";
+        string inside_t = "";
+        if (item.upgradeStats[(int)type] > 0f)
+            inside_t += $"<color=#ff7f00>+{upgradeStr}</color>";
+        if (item.growthStats[(int)type] > 0f)
+            inside_t += $"<color=#00dfff>+{growthStr}</color>";
+        if (inside_t.Length > 0)
+            t += "(" + inside_t + ")";
+
+        return t;
     }
 
-    private void AddStatLine(string statName, long value)
+    string GetEquipSlotName(EquipSlot type)
     {
-        GameObject lineObj = Instantiate(statLine, container);
-        TextMeshProUGUI statText = lineObj.GetComponent<TextMeshProUGUI>();
-
-        // 값이 0이면 
-        if (value == 0) statText.text = null;
-
+        if (equipSlotNames[(int)type].name != null)
+            return equipSlotNames[(int)type].name;
+        return null;
     }
 
-    // (오버로딩) float 값(%)을 위한 함수
-    private void AddStatLine(string statName, float value, bool isPercent = false)
+    string GetStatTypeName(StatType type)
     {
-        if (value == 0) return;
-
-        GameObject lineObj = Instantiate(statLinePrefab, statContainer);
-        var texts = lineObj.GetComponentsInChildren<TextMeshProUGUI>();
-        texts[0].text = statName;
-        texts[1].text = isPercent ? $"{value:P2}" : value.ToString("N1"); // 예: 30.40%
+        if (statNames[(int)type].name != null)
+            return statNames[(int)type].name;
+        return null;
     }
 }

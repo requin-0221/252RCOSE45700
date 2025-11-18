@@ -21,22 +21,20 @@ MonoBehaviour:
   maxUpgrade: 10
   maxGrowth: 40
   attackType: 0
-  baseMaxHp: 500
-  baseDef: 50
-  basePAtk: 100
-  baseMAtk: 0
-  basePAtkPercent: 0
-  baseMAtkPercent: 0
-  basePDmgPercent: 0
-  baseMDmgPercent: 0
-  baseDmgPercent: 0
-  baseCriDmgPercent: 0
-  baseAtkSpdPercent: 0.1
-  baseDefPercent: 0
-  baseMaxHpPercent: 0
-  baseSkillGainPercent: 0
-  baseItemDropPercent: 0
-  baseGoldDropPercent: 0
-  baseCriRateStar: 5
-  baseDefPntrStar: 5
-  baseSkillDmgStar: 5
+  baseStats:
+  - statType: 1
+    value: 300
+  - statType: 2
+    value: 30
+  - statType: 3
+    value: 100
+  - statType: 11
+    value: 5
+  - statType: 12
+    value: 5
+  - statType: 16
+    value: 5
+  - statType: 17
+    value: 5
+  - statType: 18
+    value: 5
