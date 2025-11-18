@@ -12,10 +12,10 @@ public class ResourceUI : MonoBehaviour
 
     private void Start()
     {
-        UpdateResource();
+        UpdateUI();
     }
 
-    public void UpdateResource()
+    public void UpdateUI()
     {
         goldText.text = GameManager.Instance.gold.ToString("N0");
         stoneText.text = GameManager.Instance.stones.ToString("N0");

@@ -79,6 +79,8 @@ public class ItemData : ScriptableObject
     [Tooltip("아이템 아이콘")]
     public Sprite icon;
 
+    [Tooltip("아이템 기본 가격")]
+    public long baseSellPrice = 0;
 
     [Header("--- 장비 분류 ---")]
     [Tooltip("장착 부위")]

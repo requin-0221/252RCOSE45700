@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using static UnityEditor.Progress;
 
 [Serializable]
 public class ItemInstance
@@ -10,15 +11,14 @@ public class ItemInstance
     public string uniqueID;
     
     // 상태
-    public int upgradeLv; // 일반 강화 레벨
-    public int growthLv; // 성장 레벨(총 스택)
+    public int upgradeLv;   // 일반 강화 레벨
+    public int growthLv;    // 성장 레벨(총 스택)
 
     // 성장 능력치 스택 (Key: 능력치, Value: 스택 수)
     public Dictionary<StatType, int> growthStacks;
 
     // 능력치
-    private readonly int statNum; // StatType 열거형의 총 개수
-
+    private readonly int statNum;   // StatType 열거형의 총 개수
     public float[] baseStats;       // 기본 스탯 (ItemData)
     public float[] upgradeStats;    // 강화 증가치
     public float[] growthStats;     // 성장 증가치
@@ -53,5 +53,10 @@ public class ItemInstance
             growthStats[i] = 100;
             totalStats[i] = baseStats[i] + upgradeStats[i] + growthStats[i];
         }
+    }
+
+    public long GetSellPrice()
+    {
+        return data.baseSellPrice + (upgradeLv * 150) + (growthLv * 100);
     }
 }

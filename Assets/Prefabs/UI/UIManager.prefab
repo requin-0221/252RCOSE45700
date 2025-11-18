@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2605726578233460832}
   - component: {fileID: 4697743577567332192}
   - component: {fileID: -704208288597944033}
+  - component: {fileID: 3205945256964608977}
   - component: {fileID: 3311386676262780140}
   - component: {fileID: 237906439581577168}
   m_Layer: 0
@@ -50,6 +51,7 @@ MonoBehaviour:
   inventoryUI: {fileID: -704208288597944033}
   itemInfo: {fileID: 237906439581577168}
   resourceUI: {fileID: 3311386676262780140}
+  equipmentUI: {fileID: 3205945256964608977}
 --- !u!114 &-704208288597944033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +68,19 @@ MonoBehaviour:
   slot: {fileID: 0}
   minSlots: 40
   slotsPerRow: 8
+--- !u!114 &3205945256964608977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8443570756488082349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b333c22bd2fbac44c8fca4f5738c7da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentUI
+  slotMappings: []
 --- !u!114 &3311386676262780140
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\UI\Iteminfo.cs" />
     <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
     <Compile Include="Assets\Scripts\Test\TestAddItem.cs" />
+    <Compile Include="Assets\Scripts\UI\EquipmentUI.cs" />
     <Compile Include="Assets\Scripts\Data\ItemData.cs" />
     <Compile Include="Assets\Scripts\UI\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\UI\ResourceUI.cs" />

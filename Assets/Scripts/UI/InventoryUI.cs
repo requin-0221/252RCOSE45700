@@ -12,11 +12,6 @@ public class InventoryUI : MonoBehaviour
     // 슬롯 재사용 리스트
     private List<ItemSlot> slots = new List<ItemSlot>();
 
-    private void Start()
-    {
-        UpdateUI();
-    }
-
     private void OnEnable()
     {
         UpdateUI();

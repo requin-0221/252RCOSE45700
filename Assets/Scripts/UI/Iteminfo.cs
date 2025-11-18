@@ -23,6 +23,9 @@ public class Iteminfo : MonoBehaviour
     public TextMeshProUGUI emptyText; //empty slot text
     public CanvasGroup infoGroup;
 
+    [Header("Info Slot")]
+    public Image itemIcon;
+
     [Header("Info text component")]
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemLevelText;
@@ -78,6 +81,7 @@ public class Iteminfo : MonoBehaviour
         infoGroup.interactable = true;
 
         // 아이템 정보 업데이트
+        itemIcon.sprite = item.data.icon;
         itemNameText.text = item.data.itemName;
         itemLevelText.text = $"<color=#FF7F00>+{item.upgradeLv}</color> / <color=#00DFFF>+{item.growthLv}</color>";
         itemTierText.text = $"Tier {item.data.itemTier}";
