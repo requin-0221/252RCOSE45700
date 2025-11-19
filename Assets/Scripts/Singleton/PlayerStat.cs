@@ -2,15 +2,30 @@ using UnityEngine;
 
 public class PlayerStat : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // Singleton
+    public static PlayerStat Instance { get; private set; }
+
+    private void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // ¾ÀÀÌ ¹Ù²î¾îµµ ÆÄ±«µÇÁö ¾ÊÀ½
+            Initialize();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Initialize()
     {
-        
+        Debug.Log("PlayerStat Initialized.");
+    }
+
+    public void CalculateAllStats()
+    {
+        Debug.Log("PlayerStat Calculated.");
     }
 }

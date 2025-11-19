@@ -626,6 +626,8 @@ MonoBehaviour:
   itemLevelText: {fileID: 3046169077887379417}
   itemTierText: {fileID: 3274791857602308461}
   itemPriceText: {fileID: 8464352181030988262}
+  TakeButtonText: {fileID: 4107118030863543978}
+  SellButtonText: {fileID: 4595449681798683866}
   container: {fileID: 6382447551120913115}
   statLine: {fileID: 91960982408172488, guid: fbd7f7b63445bc5408d3fc7572077685, type: 3}
   row: 11

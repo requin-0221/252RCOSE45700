@@ -9,9 +9,6 @@ public class InventoryUI : MonoBehaviour
     public int minSlots = 24;       // 기본 슬롯 개수 (40)
     public int slotsPerRow = 8;     // 한 줄당 슬롯 개수 (8)
 
-    // 슬롯 재사용 리스트
-    private List<ItemSlot> slots = new List<ItemSlot>();
-
     void Start()
     {
         if (InventoryManager.Instance == null) return;
@@ -36,42 +33,42 @@ public class InventoryUI : MonoBehaviour
         }
 
         // 필요 시 슬롯 프리팹 생성
-        if (slots.Count < neededSlots)
+        if (InventoryManager.Instance.slots.Count < neededSlots)
         {
-            int toAdd = neededSlots - slots.Count;
+            int toAdd = neededSlots - InventoryManager.Instance.slots.Count;
             for (int i = 0; i < toAdd; i++)
             {
                 GameObject obj = Instantiate(slot, content);
                 ItemSlot slotUI = obj.GetComponent<ItemSlot>();
-                slots.Add(slotUI);
+                InventoryManager.Instance.slots.Add(slotUI);
             }
         }
         // 필요 시 슬롯 프리팹 제거
-        else if (slots.Count > neededSlots)
+        else if (InventoryManager.Instance.slots.Count > neededSlots)
         {
-            for (int i = slots.Count-1; i >= neededSlots; i--)
+            for (int i = InventoryManager.Instance.slots.Count-1; i >= neededSlots; i--)
             {
-                if (UIManager.Instance.CurrSlot == slots[i])
+                if (UIManager.Instance.CurrSlot == InventoryManager.Instance.slots[i])
                 {
                     UIManager.Instance.DeselectAll();
                 }
-                Destroy(slots[i].transform.gameObject);
-                slots.RemoveAt(i);
+                Destroy(InventoryManager.Instance.slots[i].transform.gameObject);
+                InventoryManager.Instance.slots.RemoveAt(i);
             }
         }
 
         // 슬롯 프리팹 갱신
-        for (int i = 0; i < slots.Count; i++)
+        for (int i = 0; i < InventoryManager.Instance.slots.Count; i++)
         {
             if (i < inventoryList.Count)
             {
                 // 데이터가 있는 칸 -> 아이템 정보 표시
-                slots[i].SetItem(inventoryList[i]);
+                InventoryManager.Instance.slots[i].SetItem(inventoryList[i]);
             }
             else
             {
                 // 데이터가 없는 칸 -> 빈 슬롯 처리
-                slots[i].ClearSlot();
+                InventoryManager.Instance.slots[i].ClearSlot();
             }
         }
     }

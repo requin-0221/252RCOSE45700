@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class EquipmentUI : MonoBehaviour
 {
-    // --- [1] 인스펙터 설정을 위한 매핑 구조체 ---
+    // 인스펙터 표시
     [System.Serializable]
     public struct SlotMapping
     {
@@ -44,7 +44,7 @@ public class EquipmentUI : MonoBehaviour
 
     public void UpdateEquipmentUI()
     {
-        // GameManager가 데이터 관리
+        // InventoryManager 데이터 관리
         var equippedData = InventoryManager.Instance.equipments;
 
         // UI에 등록된 모든 슬롯을 순회

@@ -1419,6 +1419,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventoryGroup
       objectReference: {fileID: 0}
+    - target: {fileID: 6358544537620075270, guid: 145bc57512a71434e9fe01d63fd9f6e0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358544537620075270, guid: 145bc57512a71434e9fe01d63fd9f6e0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358544537620075270, guid: 145bc57512a71434e9fe01d63fd9f6e0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: -8786476532235103816, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+    - target: {fileID: 6358544537620075270, guid: 145bc57512a71434e9fe01d63fd9f6e0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358544537620075270, guid: 145bc57512a71434e9fe01d63fd9f6e0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickTakeButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358544537620075270, guid: 145bc57512a71434e9fe01d63fd9f6e0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358544537620075270, guid: 145bc57512a71434e9fe01d63fd9f6e0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6686484814858068523, guid: 145bc57512a71434e9fe01d63fd9f6e0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

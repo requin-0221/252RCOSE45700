@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     // Singleton
-    public static GameManager Instance;
+    public static GameManager Instance {get; private set;}
 
     private void Awake()
     {

@@ -31,6 +31,8 @@ public class Iteminfo : MonoBehaviour
     public TextMeshProUGUI itemLevelText;
     public TextMeshProUGUI itemTierText;
     public TextMeshProUGUI itemPriceText;
+    public TextMeshProUGUI TakeButtonText;
+    public TextMeshProUGUI SellButtonText;
 
     [Header("Status field")]
     public Transform container; // Container
@@ -94,6 +96,18 @@ public class Iteminfo : MonoBehaviour
             itemTierText.color = tierColorList[item.data.itemTier-1];
         }
         itemPriceText.text = item.GetSellPrice().ToString("N0");
+
+        // 장착 중인지 여부 체크
+        if (InventoryManager.Instance.equipments.ContainsValue(item))
+        {
+            TakeButtonText.text = "해제";
+            SellButtonText.color = Color.gray;
+        }
+        else
+        {
+            TakeButtonText.text = "장착";
+            SellButtonText.color = Color.white;
+        }
 
         UpdateStatLine(item);
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     // Singleton
-    public static InventoryManager Instance;
+    public static InventoryManager Instance {get; private set;}
 
     [Header("테스트용")]
     public List<ItemData> testitems;
@@ -12,6 +12,7 @@ public class InventoryManager : MonoBehaviour
 
     [Header("Inventory")]
     public List<ItemInstance> inventory = new List<ItemInstance>(); // 인벤토리 리스트
+    public List<ItemSlot> slots = new List<ItemSlot>();
 
     // 장착된 아이템 (Key: 부위, Value: 아이템 인스턴스)
     [Header("Equipments")]
@@ -44,17 +45,51 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void EquipItem(ItemSlot newItemSlot)
+    {
+        ItemInstance newItem = newItemSlot._item;
+        EquipSlot equipSlot = newItem.data.equipSlot;
+        if (equipSlot == EquipSlot.None) return;
+
+        // 이미 다른 아이템이 장착되어 있는지 확인
+        if (equipments.ContainsKey(equipSlot) && equipments[equipSlot] != null)
+        {
+            // 기존 아이템을 해제하여 인벤토리로 되돌림 (Swap)
+            ItemInstance oldItem = equipments[equipSlot];
+            Debug.Log($"index : {slots.IndexOf(newItemSlot)}, item : {oldItem}");
+            inventory.Insert(slots.IndexOf(newItemSlot), oldItem);
+        }
+
+        // 3. 새 아이템 장착 처리
+        inventory.Remove(newItem);       // 인벤토리에서 제거
+        equipments[equipSlot] = newItem;   // 장비창에 등록
+
+        // 4. 마무리 (스탯 재계산 및 UI 갱신)
+        OnInventoryChanged();
+    }
+
+    public void ReleaseItem(ItemSlot oldItemSlot)
+    {
+        ItemInstance oldItem = oldItemSlot._item;
+        EquipSlot slot = oldItem.data.equipSlot;
+
+        // 장비에서 제거
+        if (equipments.ContainsKey(slot) && equipments[slot] == oldItem)
+        {
+            equipments.Remove(slot);
+        }
+        inventory.Add(oldItem);
+
+        OnInventoryChanged();
+    }
+
     public void AddItem(ItemData data)
     {
         ItemInstance newItem = new ItemInstance(data);
         inventory.Add(newItem);
         Debug.Log($"아이템 획득: {data.itemName}");
 
-        // UI 갱신
-        if (UIManager.Instance != null)
-        {
-            UIManager.Instance.RefreshAllUI();
-        }
+        OnInventoryChanged();
     }
 
     public void RemoveItem(ItemInstance item)
@@ -62,12 +97,7 @@ public class InventoryManager : MonoBehaviour
         if (inventory.Contains(item))
         {
             inventory.Remove(item);
-
-            // UI 갱신
-            if (UIManager.Instance != null)
-            {
-                UIManager.Instance.RefreshAllUI();
-            }
+            OnInventoryChanged();
         }
     }
 
@@ -89,6 +119,7 @@ public class InventoryManager : MonoBehaviour
     public void OnClickSellButton()
     {
         // 아이템 확인
+        ItemSlot targetSlot = UIManager.Instance.CurrSlot;
         ItemInstance targetItem = UIManager.Instance.CurrSlot._item;
 
         if (targetItem == null)
@@ -104,8 +135,50 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        // 3. 판매 로직 실행
         Instance.SellItem(targetItem);
-        UIManager.Instance.RefreshAllUI();
+    }
+
+    public void OnClickTakeButton()
+    {
+        // 아이템 확인
+        ItemSlot targetSlot = UIManager.Instance.CurrSlot;
+        ItemInstance targetItem = UIManager.Instance.CurrSlot._item;
+
+        if (targetItem == null)
+        {
+            Debug.Log("빈 슬롯 오류");
+            return;
+        }
+
+        // 장착 중인 아이템은 해제
+        if (Instance.equipments.ContainsValue(targetItem))
+        {
+            Instance.ReleaseItem(targetSlot);
+        }
+        else
+        {
+            // 아니라면 장착
+            Instance.EquipItem(targetSlot);
+        }
+        return;
+    }
+
+    private void OnInventoryChanged()
+    {
+        // 플레이어 스탯 재계산
+        if (PlayerStat.Instance != null)
+            PlayerStat.Instance.CalculateAllStats();
+
+        // UI 갱신
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.RefreshAllUI();
+            if (UIManager.Instance.CurrSlot != null)
+            {
+                UIManager.Instance.SelectSlot(UIManager.Instance.CurrSlot);
+                return;
+            }
+            UIManager.Instance.DeselectAll();
+        }
     }
 }
