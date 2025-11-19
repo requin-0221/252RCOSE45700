@@ -72,10 +72,6 @@ public class ItemData : ScriptableObject
     [Tooltip("아이템 이름")]
     public string itemName;
 
-    [Tooltip("아이템 설명")]
-    [TextArea(3, 10)]
-    public string description;
-
     [Tooltip("아이템 아이콘")]
     public Sprite icon;
 

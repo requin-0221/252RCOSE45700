@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("테스트용")]
-    public ItemData testitem;
-    public ItemData testitem2;
+    public List<ItemData> testitems;
+    public int testItemNum;
 
     private void Awake()
     {
@@ -52,10 +52,10 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("GameManager Initialized.");
 
-        for(int i = 0; i < 25; i++)
+        for(int i = 0; i < testItemNum; i++)
         {
-            AddItem(testitem);
-            AddItem(testitem2);
+            ItemData temp = testitems[Random.Range(0, testitems.Count)];
+            AddItem(temp);
         }
     }
 
@@ -119,5 +119,6 @@ public class GameManager : MonoBehaviour
 
         // 3. 판매 로직 실행
         Instance.SellItem(targetItem);
+        UIManager.Instance.RefreshAllUI();
     }
 }

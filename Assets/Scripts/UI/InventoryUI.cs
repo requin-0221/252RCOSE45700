@@ -6,14 +6,21 @@ public class InventoryUI : MonoBehaviour
     public Transform content; // ScrollView의 Content
     public GameObject slot;   // 슬롯 프리팹
 
-    public int minSlots = 40;       // 기본 슬롯 개수 (40)
+    public int minSlots = 24;       // 기본 슬롯 개수 (40)
     public int slotsPerRow = 8;     // 한 줄당 슬롯 개수 (8)
 
     // 슬롯 재사용 리스트
     private List<ItemSlot> slots = new List<ItemSlot>();
 
-    private void OnEnable()
+    void Start()
     {
+        if (GameManager.Instance == null) return;
+        UpdateUI();
+    }
+
+    void OnEnable()
+    {
+        if (GameManager.Instance == null) return;
         UpdateUI();
     }
 
@@ -37,6 +44,19 @@ public class InventoryUI : MonoBehaviour
                 GameObject obj = Instantiate(slot, content);
                 ItemSlot slotUI = obj.GetComponent<ItemSlot>();
                 slots.Add(slotUI);
+            }
+        }
+        // 필요 시 슬롯 프리팹 제거
+        else if (slots.Count > neededSlots)
+        {
+            for (int i = slots.Count-1; i >= neededSlots; i--)
+            {
+                if (UIManager.Instance.CurrSlot == slots[i])
+                {
+                    UIManager.Instance.DeselectAll();
+                }
+                Destroy(slots[i].transform.gameObject);
+                slots.RemoveAt(i);
             }
         }
 

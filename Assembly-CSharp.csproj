@@ -64,15 +64,15 @@
     <Compile Include="Assets\Scripts\UI\Iteminfo.cs" />
     <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
     <Compile Include="Assets\Scripts\Test\TestAddItem.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObject\ItemData.cs" />
     <Compile Include="Assets\Scripts\UI\EquipmentUI.cs" />
-    <Compile Include="Assets\Scripts\Data\ItemData.cs" />
     <Compile Include="Assets\Scripts\UI\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\UI\ResourceUI.cs" />
     <Compile Include="Assets\Scripts\SceneTransition.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObject\ItemInstance.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\Singleton\GameManager.cs" />
     <Compile Include="Assets\Scripts\Singleton\PlayerStat.cs" />
-    <Compile Include="Assets\Scripts\Data\ItemInstance.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

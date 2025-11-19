@@ -30,6 +30,7 @@ public class Iteminfo : MonoBehaviour
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemLevelText;
     public TextMeshProUGUI itemTierText;
+    public TextMeshProUGUI itemPriceText;
 
     [Header("Status field")]
     public Transform container; // Container
@@ -43,6 +44,9 @@ public class Iteminfo : MonoBehaviour
 
     [Header("EquipSlot Name List")]
     [SerializeField] List<EquipSlotName> equipSlotNames;
+
+    [Header("Tier Colors")]
+    [SerializeField] List<Color> tierColorList;
 
     public void Start()
     {
@@ -85,6 +89,11 @@ public class Iteminfo : MonoBehaviour
         itemNameText.text = item.data.itemName;
         itemLevelText.text = $"<color=#FF7F00>+{item.upgradeLv}</color> / <color=#00DFFF>+{item.growthLv}</color>";
         itemTierText.text = $"Tier {item.data.itemTier}";
+        if (item.data.itemTier <= tierColorList.Count)
+        {
+            itemTierText.color = tierColorList[item.data.itemTier-1];
+        }
+        itemPriceText.text = item.GetSellPrice().ToString("N0");
 
         UpdateStatLine(item);
     }

@@ -1,0 +1,9 @@
+EquipType,ItemName,BaseSellPrice,EquipSlot,ItemTier,MaxUpgrade,MaxGrowth,AttackType,AtkSpdPercent,MaxHp,Def,PAtk,MAtk,PDmgPercent,MDmgPercent,DmgPercent,CriRateStar,DefPntrStar,SkillDmgStar,MaxHpPercent,DefPercent,PAtkPercent,MAtkPercent,CriDmgPercent,SkillGainPercent,ItemDropPercent,GoldDropPercent
+Head,가죽 두건,1500,Head,2,10,30,,,500,30,5,5,,,,,,,3,3,,,,,,
+Head,숲 탐험가 모자,3000,Head,4,10,30,,,900,55,10,10,,,,,,,3,3,,,,,,
+Head,광산 보호 헬멧,5000,Head,6,15,30,,,1450,85,15,15,,,,,,,4,4,,,,,,
+Head,노비스 나이트헬름,28000,Head,9,15,40,,,4100,250,50,50,,,,,,,5,5,,,,,,
+Head,레귤러 나이트헬름,36000,Head,12,20,50,,,5500,330,66,66,,,,,,,6,6,,,,,,
+Head,하이 나이트헬름,59000,Head,14,25,50,,,9000,640,90,90,,,,,,,7,7,,,,,,
+Head,흑철 투구,128000,Head,16,25,50,,,16000,1530,190,190,,,,,,,8,8,,,,,,
+Sword,연습용 검,800,Weapon,1,10,30,Physical,,300,15,100,,3,3,,5,5,5,,,,,,,,
