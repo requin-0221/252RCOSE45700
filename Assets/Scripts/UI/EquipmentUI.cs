@@ -32,20 +32,20 @@ public class EquipmentUI : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance == null) return;
+        if (InventoryManager.Instance == null) return;
         UpdateEquipmentUI();
     }
 
     private void OnEnable()
     {
-        if (GameManager.Instance == null) return;
+        if (InventoryManager.Instance == null) return;
         UpdateEquipmentUI();
     }
 
     public void UpdateEquipmentUI()
     {
         // GameManager가 데이터 관리
-        var equippedData = GameManager.Instance.equipments;
+        var equippedData = InventoryManager.Instance.equipments;
 
         // UI에 등록된 모든 슬롯을 순회
         foreach (var kvp in uiSlotLookup)

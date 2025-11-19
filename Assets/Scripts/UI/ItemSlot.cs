@@ -61,7 +61,7 @@ public class ItemSlot : MonoBehaviour
         }
 
         slotButton.onClick.RemoveAllListeners(); // 재사용 시 중복 방지
-        slotButton.onClick.AddListener(OnEmptySlotClicked);
+        slotButton.onClick.AddListener(OnSlotClicked);
     }
 
     public void SetSelectState(bool isSelected)
@@ -74,18 +74,6 @@ public class ItemSlot : MonoBehaviour
 
     void OnSlotClicked()
     {
-        // 아이템 클릭 시 상세 팝업을 띄우거나, 장착 로직 호출
-        Debug.Log($"클릭한 아이템: {_item.data.itemName}");
-
-        if (UIManager.Instance != null)
-        {
-            UIManager.Instance.SelectSlot(this);
-        }
-    }
-
-    private void OnEmptySlotClicked()
-    {
-        // "빈 슬롯(-Empty Slot-)"을 표시하기 위해 null을 전달
         if (UIManager.Instance != null)
         {
             UIManager.Instance.SelectSlot(this);

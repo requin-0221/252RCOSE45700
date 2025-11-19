@@ -6,9 +6,9 @@ public class TestAddItem : MonoBehaviour
 
     public void OnClickAdd()
     {
-        if (GameManager.Instance != null)
+        if (InventoryManager.Instance != null)
         {
-            GameManager.Instance.AddItem(testItemData);
+            InventoryManager.Instance.AddItem(testItemData);
         }
     }
 }

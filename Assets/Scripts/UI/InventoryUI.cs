@@ -14,20 +14,20 @@ public class InventoryUI : MonoBehaviour
 
     void Start()
     {
-        if (GameManager.Instance == null) return;
+        if (InventoryManager.Instance == null) return;
         UpdateUI();
     }
 
     void OnEnable()
     {
-        if (GameManager.Instance == null) return;
+        if (InventoryManager.Instance == null) return;
         UpdateUI();
     }
 
     public void UpdateUI()
     {
-        // GameManager에서 인벤토리 데이터 가져오기
-        List<ItemInstance> inventoryList = GameManager.Instance.inventory;
+        // InventoryManager에서 인벤토리 데이터 가져오기
+        List<ItemInstance> inventoryList = InventoryManager.Instance.inventory;
 
         int neededSlots = Mathf.Max(minSlots, inventoryList.Count);
         if (neededSlots % slotsPerRow != 0)

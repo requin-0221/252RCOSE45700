@@ -1060,6 +1060,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad47d1b9e7b23974eb7a7c7b02420a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Iteminfo
+--- !u!1001 &1746864758
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2878313259707171692, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 976.0769
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878313259707171692, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 516.4932
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878313259707171692, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878313259707171692, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878313259707171692, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878313259707171692, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878313259707171692, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878313259707171692, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878313259707171692, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878313259707171692, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286044387077810003, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+      propertyPath: m_Name
+      value: InventoryManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
 --- !u!114 &1759065688 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1755463200111669707, guid: b486ec964fbe8de4fac462f8238ced0b, type: 3}
@@ -1250,6 +1307,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1392685203}
     m_Modifications:
+    - target: {fileID: 2530474396253111090, guid: 145bc57512a71434e9fe01d63fd9f6e0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: -8786476532235103816, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+    - target: {fileID: 2530474396253111090, guid: 145bc57512a71434e9fe01d63fd9f6e0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickSellButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530474396253111090, guid: 145bc57512a71434e9fe01d63fd9f6e0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3327327992607472090, guid: 145bc57512a71434e9fe01d63fd9f6e0, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -1565,4 +1634,5 @@ SceneRoots:
   - {fileID: 1392685203}
   - {fileID: 225773365}
   - {fileID: 596849361}
+  - {fileID: 1746864758}
   - {fileID: 1927641120}
