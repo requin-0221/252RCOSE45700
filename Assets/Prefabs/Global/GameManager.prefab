@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7765381111071046822}
   - component: {fileID: 840508700324331486}
+  - component: {fileID: -8668483026998753280}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,6 +45,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b551999748a58114a993a182b020341e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  gold: 100000000
-  stones: 0
-  inventory: []
+--- !u!114 &-8668483026998753280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7397540238113398677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37d8e324d6522548876969c8707f076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStat
+  totalStats: []

@@ -124,8 +124,7 @@ public class Iteminfo : MonoBehaviour
             SetLineText(lineIdx++, "공격 유형 : " + attackType);
 
             temp = GetStatInfoText(item, StatType.AtkSpdPercent);
-            if (temp != null)
-                SetLineText(lineIdx++, GetStatInfoText(item, StatType.AtkSpdPercent)); // 공격 속도
+            if (temp != null) SetLineText(lineIdx++, temp); // 공격 속도
         }
         // 단순 수치들 (HP, 방어력, 물리 공격력, 마법 공격력)
         for (int i = 1; i <= 7; i++)

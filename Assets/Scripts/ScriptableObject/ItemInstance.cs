@@ -49,8 +49,8 @@ public class ItemInstance
             StatType type = (StatType)i; // 정수를 다시 Enum 타입으로 변환
 
             baseStats[i] = data.GetBaseStatValue(type);
-            upgradeStats[i] = 100;
-            growthStats[i] = 100;
+            upgradeStats[i] = 10;
+            growthStats[i] = 10;
             totalStats[i] = baseStats[i] + upgradeStats[i] + growthStats[i];
         }
     }

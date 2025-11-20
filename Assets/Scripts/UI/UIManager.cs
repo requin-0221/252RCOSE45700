@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Iteminfo itemInfo;
     [SerializeField] ResourceUI resourceUI;
     [SerializeField] EquipmentUI equipmentUI;
+    [SerializeField] StatusUI statusUI;
 
     public ItemSlot CurrSlot { get; private set; } = null;
 
@@ -25,6 +26,11 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        Instance.RefreshAllUI();
     }
 
     public void SelectSlot(ItemSlot slotUI)
@@ -59,5 +65,11 @@ public class UIManager : MonoBehaviour
         if (inventoryUI != null) inventoryUI.UpdateUI();
         if (equipmentUI != null) equipmentUI.UpdateEquipmentUI();
         if (resourceUI != null) resourceUI.UpdateUI();
+        if (statusUI != null) statusUI.UpdateUI();
+    }
+
+    public void RefreshStatusUI()
+    {
+        if (statusUI != null) statusUI.UpdateUI();
     }
 }

@@ -9,12 +9,6 @@ public class InventoryUI : MonoBehaviour
     public int minSlots = 24;       // 기본 슬롯 개수 (40)
     public int slotsPerRow = 8;     // 한 줄당 슬롯 개수 (8)
 
-    void Start()
-    {
-        if (InventoryManager.Instance == null) return;
-        UpdateUI();
-    }
-
     void OnEnable()
     {
         if (InventoryManager.Instance == null) return;

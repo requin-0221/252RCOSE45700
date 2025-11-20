@@ -30,12 +30,6 @@ public class EquipmentUI : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if (InventoryManager.Instance == null) return;
-        UpdateEquipmentUI();
-    }
-
     private void OnEnable()
     {
         if (InventoryManager.Instance == null) return;

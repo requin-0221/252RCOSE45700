@@ -10,11 +10,6 @@ public class ResourceUI : MonoBehaviour
     public Image stoneIcon;
     public TextMeshProUGUI stoneText;
 
-    private void Start()
-    {
-        UpdateUI();
-    }
-
     public void UpdateUI()
     {
         goldText.text = GameManager.Instance.gold.ToString("N0");
