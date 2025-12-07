@@ -13,7 +13,7 @@ public class StatusUI : MonoBehaviour
 
     [SerializeField] Color highlight_color;
 
-    void Start()
+    void Awake()
     {
         for (int i = 0; i < row * col; i++)
         {

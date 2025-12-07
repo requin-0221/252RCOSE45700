@@ -43,6 +43,8 @@ public class InventoryManager : MonoBehaviour
             ItemData temp = testitems[Random.Range(0, testitems.Count)];
             AddItem(temp);
         }
+
+        Debug.Log("Inventory Initialized.");
     }
 
     public void EquipItem(ItemSlot newItemSlot)
@@ -165,20 +167,18 @@ public class InventoryManager : MonoBehaviour
 
     private void OnInventoryChanged()
     {
+        if (UIManager.Instance == null || PlayerStat.Instance == null) return;
+
         // 플레이어 스탯 재계산
-        if (PlayerStat.Instance != null)
-            PlayerStat.Instance.CalculateAllStats();
+        PlayerStat.Instance.CalculateAllStats();
 
         // UI 갱신
-        if (UIManager.Instance != null)
+        UIManager.Instance.RefreshAllUI();
+        if (UIManager.Instance.CurrSlot != null)
         {
-            UIManager.Instance.RefreshAllUI();
-            if (UIManager.Instance.CurrSlot != null)
-            {
-                UIManager.Instance.SelectSlot(UIManager.Instance.CurrSlot);
-                return;
-            }
-            UIManager.Instance.DeselectAll();
+            UIManager.Instance.SelectSlot(UIManager.Instance.CurrSlot);
+            return;
         }
+        UIManager.Instance.DeselectAll();
     }
 }

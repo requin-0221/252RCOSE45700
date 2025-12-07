@@ -133,7 +133,10 @@ public class Iteminfo : MonoBehaviour
             if (temp == null) continue;
             SetLineText(lineIdx++, temp);
         }
-        if (lineIdx < row) lineIdx = row;
+        while (lineIdx < row)
+        {
+            SetLineText(lineIdx++, "");
+        }
 
         // 2¹ø ¿­
         for (int i = 8; i < Enum.GetNames(typeof(StatType)).Length; i++)

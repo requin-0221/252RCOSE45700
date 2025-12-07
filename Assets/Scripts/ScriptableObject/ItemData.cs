@@ -67,7 +67,7 @@ public struct StatData
 [CreateAssetMenu(fileName = "ItemData", menuName = "Scripts/Data/ItemData")]
 public class ItemData : ScriptableObject
 {
-    [Header("--- 기본 정보 ---")]
+    [Header("기본 정보")]
 
     [Tooltip("아이템 이름")]
     public string itemName;
@@ -78,7 +78,7 @@ public class ItemData : ScriptableObject
     [Tooltip("아이템 기본 가격")]
     public long baseSellPrice = 0;
 
-    [Header("--- 장비 분류 ---")]
+    [Header("장비 분류")]
     [Tooltip("장착 부위")]
     public EquipSlot equipSlot = EquipSlot.Weapon;
 
@@ -93,12 +93,12 @@ public class ItemData : ScriptableObject
     public int maxGrowth = 40;
 
 
-    [Header("--- 무기 전용 설정 (Weapon 슬롯만 적용) ---")]
+    [Header("무기 전용 설정")]
     [Tooltip("공격 유형")]
     public AttackType attackType = AttackType.Physical;
 
 
-    [Header("--- 장비 기본 스탯 ---")]
+    [Header("장비 기본 스탯")]
     public List<StatData> baseStats;
 
     public float GetBaseStatValue(StatType type)
