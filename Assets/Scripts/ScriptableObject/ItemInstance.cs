@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using static UnityEditor.Progress;
+using Unity;
 
 [Serializable]
 public class ItemInstance
@@ -57,6 +58,6 @@ public class ItemInstance
 
     public long GetSellPrice()
     {
-        return data.baseSellPrice + (upgradeLv * 150) + (growthLv * 100);
+        return data.baseSellPrice + (long)MathF.Floor(UpgradeConfig.Instance.GetCumulativeCost(upgradeLv) * 0.6f) + (growthLv * 100);
     }
 }

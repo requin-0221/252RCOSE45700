@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] ResourceUI resourceUI;
     [SerializeField] EquipmentUI equipmentUI;
     [SerializeField] StatusUI statusUI;
+    [SerializeField] UpgradeUI upgradeUI;
+
+    [Header("Tier Colors")]
+    [SerializeField] private List<Color> _tierColorList;
+    public IReadOnlyList<Color> tierColorList => _tierColorList;
 
     public ItemSlot CurrSlot { get; private set; } = null;
 
@@ -53,6 +59,7 @@ public class UIManager : MonoBehaviour
     public void ShowItemInfo(ItemInstance item)
     {
         itemInfo.UpdateInfo(item);
+        upgradeUI.UpdateInfo(item);
     }
 
     public void DeselectAll()
@@ -71,5 +78,10 @@ public class UIManager : MonoBehaviour
     public void RefreshStatusUI()
     {
         if (statusUI != null) statusUI.UpdateUI();
+    }
+
+    public void OnClickUpgradeButton()
+    {
+        if (upgradeUI != null) upgradeUI.enable();
     }
 }

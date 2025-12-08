@@ -47,9 +47,6 @@ public class Iteminfo : MonoBehaviour
     [Header("EquipSlot Name List")]
     [SerializeField] List<EquipSlotName> equipSlotNames;
 
-    [Header("Tier Colors")]
-    [SerializeField] List<Color> tierColorList;
-
     public void Start()
     {
         for (int i = 0; i < row * col; i++)
@@ -91,11 +88,11 @@ public class Iteminfo : MonoBehaviour
         itemNameText.text = item.data.itemName;
         itemLevelText.text = $"<color=#FF7F00>+{item.upgradeLv}</color> / <color=#00DFFF>+{item.growthLv}</color>";
         itemTierText.text = $"Tier {item.data.itemTier}";
-        if (item.data.itemTier <= tierColorList.Count)
+        if (item.data.itemTier <= UIManager.Instance.tierColorList.Count)
         {
-            itemTierText.color = tierColorList[item.data.itemTier-1];
+            itemTierText.color = UIManager.Instance.tierColorList[item.data.itemTier-1];
         }
-        itemPriceText.text = item.GetSellPrice().ToString("N0");
+        itemPriceText.text = "판매가 : " + item.GetSellPrice().ToString("N0");
 
         // 장착 중인지 여부 체크
         if (InventoryManager.Instance.equipments.ContainsValue(item))
