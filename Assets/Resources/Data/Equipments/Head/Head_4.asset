@@ -33,3 +33,4 @@ MonoBehaviour:
     value: 6
   - statType: 12
     value: 6
+  upgradeProfile: {fileID: 11400000, guid: c36753d98abe3084283aa2dc8cac8873, type: 2}

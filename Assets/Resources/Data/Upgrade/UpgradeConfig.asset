@@ -39,97 +39,97 @@ MonoBehaviour:
     cumulativeCost: 79390
   - level: 6
     successRate: 0.72
-    cost: 64000
-    cumulativeCost: 168279
+    cost: 48000
+    cumulativeCost: 146057
   - level: 7
     successRate: 0.68
-    cost: 128000
-    cumulativeCost: 356514
+    cost: 72000
+    cumulativeCost: 251939
   - level: 8
     successRate: 0.64
-    cost: 256000
-    cumulativeCost: 756514
+    cost: 108000
+    cumulativeCost: 420689
   - level: 9
     successRate: 0.6
-    cost: 512000
-    cumulativeCost: 1609847
+    cost: 162000
+    cumulativeCost: 690689
   - level: 10
     successRate: 0.55
-    cost: 768000
-    cumulativeCost: 3006211
+    cost: 486000
+    cumulativeCost: 1574325
   - level: 11
     successRate: 0.5
-    cost: 1152000
-    cumulativeCost: 5310211
+    cost: 583200
+    cumulativeCost: 2740725
   - level: 12
     successRate: 0.45
-    cost: 1728000
-    cumulativeCost: 9150211
+    cost: 699840
+    cumulativeCost: 4295925
   - level: 13
     successRate: 0.4
-    cost: 2592000
-    cumulativeCost: 15630211
+    cost: 839808
+    cumulativeCost: 6395445
   - level: 14
     successRate: 0.35
-    cost: 3888000
-    cumulativeCost: 26738782
+    cost: 1007770
+    cumulativeCost: 9274787
   - level: 15
     successRate: 0.3
-    cost: 7776000
-    cumulativeCost: 52658782
+    cost: 3023309
+    cumulativeCost: 19352483
   - level: 16
     successRate: 0.3
-    cost: 11664000
-    cumulativeCost: 91538782
+    cost: 3325640
+    cumulativeCost: 30437949
   - level: 17
     successRate: 0.3
-    cost: 17496000
-    cumulativeCost: 149858782
+    cost: 3658204
+    cumulativeCost: 42631961
   - level: 18
     successRate: 0.3
-    cost: 26244000
-    cumulativeCost: 237338782
+    cost: 4024024
+    cumulativeCost: 56045374
   - level: 19
     successRate: 0.3
-    cost: 39366000
-    cumulativeCost: 368558782
+    cost: 4426426
+    cumulativeCost: 70800129
   - level: 20
-    successRate: 0.15
-    cost: 59049000
-    cumulativeCost: 762218782
+    successRate: 0.27
+    cost: 13279279
+    cumulativeCost: 119982645
   - level: 21
-    successRate: 0.15
-    cost: 59049000
-    cumulativeCost: 1155878782
+    successRate: 0.24
+    cost: 14607207
+    cumulativeCost: 180846008
   - level: 22
-    successRate: 0.15
-    cost: 59049000
-    cumulativeCost: 1549538782
+    successRate: 0.21
+    cost: 16067928
+    cumulativeCost: 257359950
   - level: 23
-    successRate: 0.15
-    cost: 59049000
-    cumulativeCost: 1943198782
+    successRate: 0.18
+    cost: 17674721
+    cumulativeCost: 355552843
   - level: 24
     successRate: 0.15
-    cost: 59049000
-    cumulativeCost: 2336858782
+    cost: 19442193
+    cumulativeCost: 485167461
   - level: 25
-    successRate: 0.05
-    cost: 88573500
-    cumulativeCost: 4108328782
+    successRate: 0.15
+    cost: 38884385
+    cumulativeCost: 744396698
   - level: 26
-    successRate: 0.05
-    cost: 88573500
-    cumulativeCost: 5879798782
+    successRate: 0.15
+    cost: 42772824
+    cumulativeCost: 1029548858
   - level: 27
-    successRate: 0.05
-    cost: 88573500
-    cumulativeCost: 7651268782
+    successRate: 0.15
+    cost: 47050106
+    cumulativeCost: 1343216234
   - level: 28
-    successRate: 0.05
-    cost: 88573500
-    cumulativeCost: 9422738782
+    successRate: 0.15
+    cost: 51755117
+    cumulativeCost: 1688250348
   - level: 29
-    successRate: 0.05
-    cost: 88573500
-    cumulativeCost: 11194208782
+    successRate: 0.15
+    cost: 56930629
+    cumulativeCost: 2067787873

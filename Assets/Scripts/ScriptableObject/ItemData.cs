@@ -90,7 +90,7 @@ public class ItemData : ScriptableObject
     public int maxUpgrade = 10;
 
     [Tooltip("최대 성장 수치")]
-    public int maxGrowth = 40;
+    public int maxGrowth = 30;
 
 
     [Header("무기 전용 설정")]
@@ -110,4 +110,8 @@ public class ItemData : ScriptableObject
         }
         return 0f;
     }
+
+    [Header("강화 설정")]
+    [Tooltip("아이템 강화 규칙")]
+    public UpgradeProfile upgradeProfile;
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class UpgradeUI : MonoBehaviour
 {
@@ -19,13 +20,25 @@ public class UpgradeUI : MonoBehaviour
     public TextMeshProUGUI UpgradeCostText;
 
     [Header("Status field")]
+    public TextMeshProUGUI UpgradeLevelText;
     public Transform container; // Container
     public GameObject statLine; // StatLine Prefab
+    public int row = 17;
     [SerializeField] List<GameObject> statLines;
 
     private void Awake()
     {
         if (upgradeGroup == null) upgradeGroup = GetComponent<CanvasGroup>();
+        
+        // StatLine 생성
+        for (int i = 0; i < 13; i++)
+        {
+            GameObject lineObj = Instantiate(statLine, container);
+            lineObj.GetComponent<TextMeshProUGUI>().text = null;
+            lineObj.GetComponent<TextMeshProUGUI>().fontSize = 32;
+            statLines.Add(lineObj);
+        }
+
         disable();
     }
 
@@ -59,6 +72,11 @@ public class UpgradeUI : MonoBehaviour
         {
             itemTierText.color = UIManager.Instance.tierColorList[item.data.itemTier - 1];
         }
-        UpgradeCostText.text = "강화 비용 : " + UpgradeConfig.Instance.GetUpgradeCost(item.upgradeLv).ToString("N0");
+        UpgradeCostText.text = "강화 비용 : " + 
+                                (UpgradeConfig.Instance.GetUpgradeCost(item.upgradeLv) 
+                                 * Mathf.Sqrt(item.data.itemTier)).ToString("N0");
+        // 강화 증가 스탯 부분
+        UpgradeLevelText.text = $"+{item.upgradeLv}    ▶    <color=#FFFF00>+{item.upgradeLv + 1}</color>";
+
     }
 }

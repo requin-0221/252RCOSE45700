@@ -19,11 +19,6 @@ public class UpgradeConfig : ScriptableObject
         {
             if (_instance == null)
                 _instance = Resources.Load<UpgradeConfig>("Data/Upgrade/UpgradeConfig");
-            
-            if (_instance == null)
-            {
-                Debug.LogError("치명적 오류: Resources/Data/Upgrade/UpgradeConfig 에셋을 찾을 수 없습니다! 파일 이름과 위치를 확인하세요.");
-            }
             return _instance;
         }
     }

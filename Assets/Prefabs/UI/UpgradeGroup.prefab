@@ -605,8 +605,8 @@ MonoBehaviour:
   m_Padding:
     m_Left: 16
     m_Right: 16
-    m_Top: 16
-    m_Bottom: 16
+    m_Top: 8
+    m_Bottom: 8
   m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
@@ -1653,8 +1653,10 @@ MonoBehaviour:
   itemLevelText: {fileID: 8527330647201311582}
   itemTierText: {fileID: 7192450376747666399}
   UpgradeCostText: {fileID: 6666031545791325420}
+  UpgradeLevelText: {fileID: 3095070275707551607}
   container: {fileID: 5559119234000153385}
   statLine: {fileID: 91960982408172488, guid: fbd7f7b63445bc5408d3fc7572077685, type: 3}
+  row: 17
   statLines: []
 --- !u!1 &8175748106915114274
 GameObject:

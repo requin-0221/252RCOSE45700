@@ -106,6 +106,8 @@ public class ItemDataImporter : EditorWindow
         }
 
         // ItemData.cs 필드 매핑
+
+        // 아이템 이름
         item.itemName = data[headerMap["ItemName"]];
 
         // 아이콘
@@ -138,6 +140,33 @@ public class ItemDataImporter : EditorWindow
             item.attackType = aType;
         else
             item.attackType = AttackType.Physical;
+
+        // UpgradeProfile
+        string upgradeProfileType = data[headerMap["UpgradeProfile"]];
+        string upgradeProfilePath = "Data/Upgrade/UpgradeProfile";
+        switch(upgradeProfileType)
+        {
+            case "방어구":
+                upgradeProfilePath = upgradeProfilePath + "Armor";
+                break;
+
+            case "장신구":
+                upgradeProfilePath = upgradeProfilePath + "Accessory";
+                break;
+
+            case "무기":
+                upgradeProfilePath = upgradeProfilePath + "Weapon";
+                break;
+
+            case "보조무기":
+                upgradeProfilePath = upgradeProfilePath + "Subweapon";
+                break;
+
+            default:
+                upgradeProfilePath = upgradeProfilePath + "Armor";
+                break;
+        }
+        item.upgradeProfile = Resources.Load<UpgradeProfile>(upgradeProfilePath);
 
         // 스탯 리스트 처리
         item.baseStats = new List<StatData>();
