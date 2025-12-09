@@ -164,10 +164,10 @@ public class Iteminfo : MonoBehaviour
         // Total_Stat(+Upgrade_Stat+Growth_Stat) 포맷
         string upgradeStr, growthStr, totalStr;
         string typeName = type.ToString(); // "PhysicalAttack", "CritDamagePercent"
+        string format = "F0"; // 소수점 없음
 
         if (typeName.EndsWith("Percent"))
         {
-            string format = "F0"; // 소수점 없음
             //baseStr = (item.baseStats[i] * 100).ToString(format) + "%";
             upgradeStr = (item.upgradeStats[i]).ToString(format) + "%";
             growthStr = (item.growthStats[i]).ToString(format) + "%";
@@ -175,7 +175,6 @@ public class Iteminfo : MonoBehaviour
         }
         else
         {
-            string format = "F0"; // 소수점 없음
             //baseStr = item.baseStats[i].ToString(format);
             upgradeStr = item.upgradeStats[i].ToString(format);
             growthStr = item.growthStats[i].ToString(format);

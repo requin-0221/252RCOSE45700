@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
-using static UnityEditor.Progress;
 using Unity;
+using UnityEngine;
+using static UnityEditor.Progress;
 
 [Serializable]
 public class ItemInstance
@@ -50,14 +51,40 @@ public class ItemInstance
             StatType type = (StatType)i; // 정수를 다시 Enum 타입으로 변환
 
             baseStats[i] = data.GetBaseStatValue(type);
-            upgradeStats[i] = 10;
+            //upgradeStats[i] = 10;
             growthStats[i] = 10;
             totalStats[i] = baseStats[i] + upgradeStats[i] + growthStats[i];
         }
     }
 
+    public long GetUpgradeCost()
+    {
+        return (long)MathF.Floor(UpgradeConfig.Instance.GetCumulativeCost(upgradeLv) * 0.6f);
+    }
+
     public long GetSellPrice()
     {
-        return data.baseSellPrice + (long)MathF.Floor(UpgradeConfig.Instance.GetCumulativeCost(upgradeLv) * 0.6f) + (growthLv * 100);
+        return data.baseSellPrice + GetUpgradeCost() + (growthLv * 100);
+    }
+
+    public void Upgrade()
+    {
+        foreach (var rule in data.upgradeProfile.rules)
+        {
+            int i = (int)rule.statType;
+            float value = rule.values[upgradeLv];
+
+            if (value == 0) continue;
+
+            if (i == (int)StatType.MaxHp || i == (int)StatType.Def ||
+                i == (int)StatType.PAtk || i == (int)StatType.MAtk)
+            {
+                value *= Mathf.Floor(Mathf.Sqrt(data.itemTier));
+            }
+            upgradeStats[i] += value;
+        }
+
+        upgradeLv++;
+        calculateStats();
     }
 }

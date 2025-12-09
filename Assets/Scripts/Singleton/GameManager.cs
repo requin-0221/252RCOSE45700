@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     private void Initialize()
     {
         // (테스트) 골드 지급
-        gold = 10000;
+        gold = 100000000000;
         stones = 50;
 
         Debug.Log("GameManager Initialized.");

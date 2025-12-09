@@ -46,13 +46,6 @@ public class UpgradeConfig : ScriptableObject
         return levelTable[currentLevel].successRate;
     }
 
-    // 강화 가능 여부 체크
-    public bool CanUpgrade(ItemInstance item)
-    {
-        // 아이템 고유의 한계치보다 현재 레벨이 낮아야 강화 가능
-        return item.upgradeLv < item.data.maxUpgrade;
-    }
-
     public long GetCumulativeCost(int currentLevel)
     {
         // 강화 안 된 상태(0강)는 추가 비용 0

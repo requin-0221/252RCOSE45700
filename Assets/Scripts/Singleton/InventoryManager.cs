@@ -108,7 +108,6 @@ public class InventoryManager : MonoBehaviour
         if (!inventory.Contains(item)) return;
 
         // 판매 가격 계산
-        // 나중에 공식 사용
         long sellPrice = item.GetSellPrice();
 
         // 골드 지급
@@ -116,6 +115,26 @@ public class InventoryManager : MonoBehaviour
         Debug.Log($"아이템 판매: {item.data.itemName} (+{sellPrice} Gold)");
 
         RemoveItem(item);
+    }
+
+    public bool UpgradeItem(ItemInstance item)
+    {
+        if (!inventory.Contains(item) && !equipments.ContainsValue(item)) return false;
+        if (item.upgradeLv >= item.data.maxUpgrade) return false;
+
+        // 판매 가격 계산
+        long cost = item.GetUpgradeCost();
+
+        if (GameManager.Instance.gold < cost) return false;
+
+        // 강화 비용 지불
+        GameManager.Instance.AddGold(-1 * cost);
+        Debug.Log($"아이템 강화: {item.data.itemName} (-{cost} Gold)");
+
+        item.Upgrade();
+        OnInventoryChanged();
+
+        return true;
     }
 
     public void OnClickSellButton()
@@ -163,6 +182,24 @@ public class InventoryManager : MonoBehaviour
             Instance.EquipItem(targetSlot);
         }
         return;
+    }
+
+    public void OnClickUpgradeAttemptButton()
+    {
+        // 아이템 확인
+        ItemSlot targetSlot = UIManager.Instance.CurrSlot;
+        ItemInstance targetItem = UIManager.Instance.CurrSlot._item;
+
+        if (targetItem == null)
+        {
+            Debug.Log("빈 슬롯 오류");
+            return;
+        }
+
+        if (UpgradeItem(targetItem) == false)
+        {
+            Debug.Log("강화 실패");
+        }
     }
 
     private void OnInventoryChanged()
