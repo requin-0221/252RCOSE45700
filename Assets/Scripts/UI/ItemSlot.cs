@@ -52,8 +52,8 @@ public class ItemSlot : MonoBehaviour
 
         iconImage.sprite = null;
         iconImage.enabled = false; // 아이콘 숨김 (배경만 보임)
-        upgradeText.enabled = false;
-        growthText.enabled = false;
+        upgradeText.text = null;
+        growthText.text = null;
 
         if (UIManager.Instance != null)
         {

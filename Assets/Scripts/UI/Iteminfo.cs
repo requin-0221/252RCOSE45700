@@ -206,4 +206,69 @@ public class Iteminfo : MonoBehaviour
             return statNames[(int)type].name;
         return null;
     }
+
+    public void OnClickSellButton()
+    {
+        if (UIManager.Instance == null || InventoryManager.Instance == null)
+        {
+            Debug.Log("UIManger or InventoryManager is null");
+            return;
+        }
+
+        // 아이템 확인
+        ItemSlot targetSlot = UIManager.Instance.CurrSlot;
+        ItemInstance targetItem = UIManager.Instance.CurrSlot._item;
+
+        if (targetItem == null)
+        {
+            Debug.Log("빈 슬롯 오류");
+            return;
+        }
+
+        // 장착 중인 아이템은 판매 불가 처리
+        if (InventoryManager.Instance.equipments.ContainsValue(targetItem))
+        {
+            Debug.Log("장착 중인 아이템은 판매할 수 없습니다.");
+            UIManager.Instance.ShowPopup("장착 중인 아이템은 판매할 수 없습니다.");
+            return;
+        }
+
+        InventoryManager.Instance.SellItem(targetItem);
+    }
+
+    public void OnClickTakeButton()
+    {
+        if (UIManager.Instance == null || InventoryManager.Instance == null)
+        {
+            Debug.Log("UIManger or InventoryManager is null");
+            return;
+        }
+
+        // 아이템 확인
+        ItemSlot targetSlot = UIManager.Instance.CurrSlot;
+        ItemInstance targetItem = UIManager.Instance.CurrSlot._item;
+
+        if (targetItem == null)
+        {
+            Debug.Log("빈 슬롯 오류");
+            return;
+        }
+
+        // 장착 중인 아이템은 해제
+        if (InventoryManager.Instance.equipments.ContainsValue(targetItem))
+        {
+            InventoryManager.Instance.ReleaseItem(targetSlot);
+        }
+        else
+        {
+            // 아니라면 장착
+            InventoryManager.Instance.EquipItem(targetSlot);
+        }
+        return;
+    }
+
+    public void OnClickUpgradeButton()
+    {
+        if (UIManager.Instance != null) UIManager.Instance.ShowUpgradeUI();
+    }
 }

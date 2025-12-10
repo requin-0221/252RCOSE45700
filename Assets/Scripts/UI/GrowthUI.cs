@@ -3,10 +3,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradeUI : MonoBehaviour
+public class GrowthUI : MonoBehaviour
 {
     [Header("Canvas Group")]
-    [SerializeField] CanvasGroup upgradeGroup;
+    [SerializeField] CanvasGroup growthGroup;
 
     [Header("Item Slot")]
     public Image itemIcon;
@@ -15,61 +15,52 @@ public class UpgradeUI : MonoBehaviour
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemLevelText;
     public TextMeshProUGUI itemTierText;
-    public TextMeshProUGUI upgradeCostText;
+    public TextMeshProUGUI growthCostText;
 
     [Header("Button")]
     [SerializeField] Button closeButton;
-    [SerializeField] Button upgradeAttemptButton;
+    [SerializeField] Button growthAttemptButton;
 
-    [Header("Status field")]
-    public TextMeshProUGUI upgradeLevelText;
-    public TextMeshProUGUI upgradeProbText;
+    [Header("Stacks field")]
     public Transform container; // Container
-    public GameObject statLine; // StatLine Prefab
-    [SerializeField] List<GameObject> statLines;
+    public GameObject statStack; // StatStacks Prefab
+    [SerializeField] List<GameObject> statStacks;
 
     [Header("StatType Name List")]
     public List<StatName> statNames;
 
     private void Awake()
     {
-        if (upgradeGroup == null) upgradeGroup = GetComponent<CanvasGroup>();
+        if (growthGroup == null) growthGroup = GetComponent<CanvasGroup>();
         
-        // StatLine 생성
-        for (int i = 0; i < 11; i++)
-        {
-            GameObject lineObj = Instantiate(statLine, container);
-            lineObj.GetComponent<TextMeshProUGUI>().text = null;
-            lineObj.GetComponent<TextMeshProUGUI>().fontSize = 32;
-            statLines.Add(lineObj);
-        }
+        // 
 
         // 버튼에 리스너 연결
         closeButton.onClick.AddListener(OnClickCloseButton);
-        upgradeAttemptButton.onClick.AddListener(OnClickUpgradeAttemptButton);
+        growthAttemptButton.onClick.AddListener(OnClickUpgradeAttemptButton);
 
         disable();
     }
 
     public void disable()
     {
-        upgradeGroup.alpha = 0f;
-        upgradeGroup.interactable = false;
-        upgradeGroup.blocksRaycasts = false;
+        growthGroup.alpha = 0f;
+        growthGroup.interactable = false;
+        growthGroup.blocksRaycasts = false;
     }
 
     public void enable()
     {
-        upgradeGroup.alpha = 1f;
-        upgradeGroup.interactable = true;
-        upgradeGroup.blocksRaycasts = true;
+        growthGroup.alpha = 1f;
+        growthGroup.interactable = true;
+        growthGroup.blocksRaycasts = true;
     }
 
     public void UpdateInfo(ItemInstance item)
     {
         if (item == null)
         {
-            Debug.Log("Upgrade UI : item is null");
+            Debug.Log("growth UI : item is null");
             return;
         }
 
@@ -85,24 +76,12 @@ public class UpgradeUI : MonoBehaviour
         }
         if (item.upgradeLv >= item.data.maxUpgrade)
         {
-            upgradeCostText.text = "강화 비용 : -";
-            upgradeProbText.text = "-";
+            growthCostText.text = "강화 비용 : -";
         }
         else
         {
-            upgradeCostText.text = "강화 비용 : " + upgradeCost.ToString("N0");
-            if (GameManager.Instance.gold < upgradeCost) { upgradeCostText.color = Color.gray; }
-            upgradeProbText.text = "성공 확률 : " + (UpgradeConfig.Instance.GetSuccessProb(item.upgradeLv)*100).ToString("F0") + "%";
-        }
-
-        // 강화 증가 스탯 부분
-        if (item.upgradeLv >= item.data.maxUpgrade)
-        {
-            upgradeLevelText.text = $"+{item.upgradeLv} (MAX)";
-        }
-        else
-        {
-            upgradeLevelText.text = $"+{item.upgradeLv}    ▶    <color=#FFFF00>+{item.upgradeLv + 1}</color>";
+            growthCostText.text = "강화 비용 : " + upgradeCost.ToString("N0");
+            if (GameManager.Instance.gold < upgradeCost) { growthCostText.color = Color.gray; }
         }
 
         UpdateStatLine(item);
@@ -194,19 +173,19 @@ public class UpgradeUI : MonoBehaviour
 
     void CreateLineText(string t)
     {
-        GameObject lineObj = Instantiate(statLine, container);
+        GameObject lineObj = Instantiate(statStack, container);
         lineObj.GetComponent<TextMeshProUGUI>().text = t;
         lineObj.GetComponent<TextMeshProUGUI>().fontSize = 32;
-        statLines.Add(lineObj);
+        statStacks.Add(lineObj);
     }
 
     void ClearLineTexts()
     {
-        foreach (var line in statLines)
+        foreach (var line in statStacks)
         {
             Destroy(line);
         }
-        statLines.Clear();
+        statStacks.Clear();
     }
 
     string GetStatTypeName(StatType type)

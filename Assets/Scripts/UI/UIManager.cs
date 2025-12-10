@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] EquipmentUI equipmentUI;
     [SerializeField] StatusUI statusUI;
     [SerializeField] UpgradeUI upgradeUI;
+
+    [Header("Prefab")]
+    public GameObject messageGroupPrefab; // 인스펙터에서 할당
+    public Transform popupParent;         // 팝업이 생성될 Canvas
 
     [Header("Tier Colors")]
     [SerializeField] private List<Color> _tierColorList;
@@ -80,8 +85,18 @@ public class UIManager : MonoBehaviour
         if (statusUI != null) statusUI.UpdateUI();
     }
 
-    public void OnClickUpgradeButton()
+    public void ShowPopup(string message, Action callback = null, string btnTxt = "확인", string title = "Message")
     {
-        if (upgradeUI != null) upgradeUI.enable();
+        GameObject obj = Instantiate(messageGroupPrefab, popupParent);
+        MessageUI popup = obj.GetComponent<MessageUI>();
+        popup.Setup(message, callback, btnTxt, title);
+    }
+
+    public void ShowUpgradeUI()
+    {
+        if (upgradeUI != null)
+        {
+            upgradeUI.enable();
+        }
     }
 }

@@ -49,6 +49,9 @@ MonoBehaviour:
   resourceUI: {fileID: 0}
   equipmentUI: {fileID: 0}
   statusUI: {fileID: 0}
+  upgradeUI: {fileID: 0}
+  messageGroupPrefab: {fileID: 7554818893794986244, guid: c6474172898557c4bb7ab917f8e982a7, type: 3}
+  popupParent: {fileID: 0}
   _tierColorList:
   - {r: 0.49803922, g: 0.49803922, b: 0.49803922, a: 1}
   - {r: 0.49803922, g: 0.49803922, b: 0.49803922, a: 1}

@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 2365828785150335225}
   - component: {fileID: 163203008889061520}
   m_Layer: 5
-  m_Name: StatusGroup
+  m_Name: StatusUIGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -117,89 +117,25 @@ public class InventoryManager : MonoBehaviour
         RemoveItem(item);
     }
 
-    public bool UpgradeItem(ItemInstance item)
+    public bool UpgradeAttempt(ItemInstance item)
     {
-        if (!inventory.Contains(item) && !equipments.ContainsValue(item)) return false;
-        if (item.upgradeLv >= item.data.maxUpgrade) return false;
+        if (item == null) return false;
 
         // 판매 가격 계산
         long cost = item.GetUpgradeCost();
-
-        if (GameManager.Instance.gold < cost) return false;
 
         // 강화 비용 지불
         GameManager.Instance.AddGold(-1 * cost);
         Debug.Log($"아이템 강화: {item.data.itemName} (-{cost} Gold)");
 
-        item.Upgrade();
-        OnInventoryChanged();
-
-        return true;
-    }
-
-    public void OnClickSellButton()
-    {
-        // 아이템 확인
-        ItemSlot targetSlot = UIManager.Instance.CurrSlot;
-        ItemInstance targetItem = UIManager.Instance.CurrSlot._item;
-
-        if (targetItem == null)
+        if (Random.Range(0f, 1f) <= UpgradeConfig.Instance.GetSuccessProb(item.upgradeLv))
         {
-            Debug.Log("빈 슬롯 오류");
-            return;
+            item.Upgrade();
+            OnInventoryChanged();
+            return true;
         }
-
-        // 장착 중인 아이템은 판매 불가 처리
-        if (Instance.equipments.ContainsValue(targetItem))
-        {
-            Debug.Log("장착 중인 아이템은 판매할 수 없습니다.");
-            return;
-        }
-
-        Instance.SellItem(targetItem);
-    }
-
-    public void OnClickTakeButton()
-    {
-        // 아이템 확인
-        ItemSlot targetSlot = UIManager.Instance.CurrSlot;
-        ItemInstance targetItem = UIManager.Instance.CurrSlot._item;
-
-        if (targetItem == null)
-        {
-            Debug.Log("빈 슬롯 오류");
-            return;
-        }
-
-        // 장착 중인 아이템은 해제
-        if (Instance.equipments.ContainsValue(targetItem))
-        {
-            Instance.ReleaseItem(targetSlot);
-        }
-        else
-        {
-            // 아니라면 장착
-            Instance.EquipItem(targetSlot);
-        }
-        return;
-    }
-
-    public void OnClickUpgradeAttemptButton()
-    {
-        // 아이템 확인
-        ItemSlot targetSlot = UIManager.Instance.CurrSlot;
-        ItemInstance targetItem = UIManager.Instance.CurrSlot._item;
-
-        if (targetItem == null)
-        {
-            Debug.Log("빈 슬롯 오류");
-            return;
-        }
-
-        if (UpgradeItem(targetItem) == false)
-        {
-            Debug.Log("강화 실패");
-        }
+        UIManager.Instance.RefreshAllUI();
+        return false;
     }
 
     private void OnInventoryChanged()

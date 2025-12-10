@@ -57,14 +57,19 @@ public class ItemInstance
         }
     }
 
+    public long GetUpgradeCumulativeCost()
+    {
+        return (long)Mathf.Floor(UpgradeConfig.Instance.GetCumulativeCost(upgradeLv) * Mathf.Sqrt(data.itemTier));
+    }
+
     public long GetUpgradeCost()
     {
-        return (long)MathF.Floor(UpgradeConfig.Instance.GetCumulativeCost(upgradeLv) * 0.6f);
+        return (long)Mathf.Floor(UpgradeConfig.Instance.GetUpgradeCost(upgradeLv) * Mathf.Sqrt(data.itemTier));
     }
 
     public long GetSellPrice()
     {
-        return data.baseSellPrice + GetUpgradeCost() + (growthLv * 100);
+        return data.baseSellPrice + GetUpgradeCumulativeCost() + (growthLv * 100);
     }
 
     public void Upgrade()

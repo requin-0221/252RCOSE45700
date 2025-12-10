@@ -67,11 +67,13 @@
     <Compile Include="Assets\Scripts\ScriptableObject\ItemData.cs" />
     <Compile Include="Assets\Scripts\ScriptableObject\UpgradeProfile.cs" />
     <Compile Include="Assets\Scripts\UI\EquipmentUI.cs" />
+    <Compile Include="Assets\Scripts\UI\MessageUI.cs" />
     <Compile Include="Assets\Scripts\UI\StatusUI.cs" />
     <Compile Include="Assets\Scripts\UI\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\UI\ResourceUI.cs" />
     <Compile Include="Assets\Scripts\SceneTransition.cs" />
     <Compile Include="Assets\Scripts\ScriptableObject\ItemInstance.cs" />
+    <Compile Include="Assets\Scripts\UI\GrowthUI.cs" />
     <Compile Include="Assets\Scripts\UI\UpgradeUI.cs" />
     <Compile Include="Assets\Scripts\Singleton\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\ScriptableObject\UpgradeConfig.cs" />
