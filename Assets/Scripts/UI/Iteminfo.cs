@@ -41,9 +41,6 @@ public class Iteminfo : MonoBehaviour
     public int col;
     [SerializeField] List<GameObject> statLines;
 
-    [Header("StatType Name List")]
-    public List<StatName> statNames;
-
     [Header("EquipSlot Name List")]
     [SerializeField] List<EquipSlotName> equipSlotNames;
 
@@ -142,6 +139,10 @@ public class Iteminfo : MonoBehaviour
             if (temp == null) continue;
             SetLineText(lineIdx++, GetStatInfoText(item, (StatType)i));
         }
+        while (lineIdx < row*2)
+        {
+            SetLineText(lineIdx++, "");
+        }
     }
 
     void SetLineText(int i, string t)
@@ -158,7 +159,6 @@ public class Iteminfo : MonoBehaviour
 
         // 스탯 이름
         string t = GetStatTypeName(type);
-        if (t == null) return "(Error)";
         t += " : ";
 
         // Total_Stat(+Upgrade_Stat+Growth_Stat) 포맷
@@ -200,11 +200,14 @@ public class Iteminfo : MonoBehaviour
         return null;
     }
 
-    string GetStatTypeName(StatType type)
+    private string GetStatTypeName(StatType type)
     {
-        if (statNames[(int)type].name != null)
-            return statNames[(int)type].name;
-        return null;
+        if (UIManager.Instance == null)
+        {
+            Debug.Log("ItemInfo : UIManager is null");
+            return "(Error)";
+        }
+        return UIManager.Instance.statNamesList[(int)type].name;
     }
 
     public void OnClickSellButton()
@@ -270,5 +273,10 @@ public class Iteminfo : MonoBehaviour
     public void OnClickUpgradeButton()
     {
         if (UIManager.Instance != null) UIManager.Instance.ShowUpgradeUI();
+    }
+
+    public void OnClickGrowthButton()
+    {
+        if (UIManager.Instance != null) UIManager.Instance.ShowGrowthUI();
     }
 }

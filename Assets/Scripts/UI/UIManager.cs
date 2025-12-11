@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] EquipmentUI equipmentUI;
     [SerializeField] StatusUI statusUI;
     [SerializeField] UpgradeUI upgradeUI;
+    [SerializeField] GrowthUI growthUI;
 
     [Header("Prefab")]
     public GameObject messageGroupPrefab; // 인스펙터에서 할당
@@ -23,6 +24,10 @@ public class UIManager : MonoBehaviour
     [Header("Tier Colors")]
     [SerializeField] private List<Color> _tierColorList;
     public IReadOnlyList<Color> tierColorList => _tierColorList;
+
+    [Header("Stat Names")]
+    [SerializeField] private List<StatName> _statNamesList;
+    public IReadOnlyList<StatName> statNamesList => _statNamesList;
 
     public ItemSlot CurrSlot { get; private set; } = null;
 
@@ -65,6 +70,7 @@ public class UIManager : MonoBehaviour
     {
         itemInfo.UpdateInfo(item);
         upgradeUI.UpdateInfo(item);
+        growthUI.UpdateInfo(item);
     }
 
     public void DeselectAll()
@@ -85,6 +91,11 @@ public class UIManager : MonoBehaviour
         if (statusUI != null) statusUI.UpdateUI();
     }
 
+    public void RefreshResourceUI()
+    {
+        if (resourceUI != null) resourceUI.UpdateUI();
+    }
+
     public void ShowPopup(string message, Action callback = null, string btnTxt = "확인", string title = "Message")
     {
         GameObject obj = Instantiate(messageGroupPrefab, popupParent);
@@ -97,6 +108,14 @@ public class UIManager : MonoBehaviour
         if (upgradeUI != null)
         {
             upgradeUI.enable();
+        }
+    }
+
+    public void ShowGrowthUI()
+    {
+        if (growthUI != null)
+        {
+            growthUI.enable();
         }
     }
 }

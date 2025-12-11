@@ -15,7 +15,7 @@ public class ResourceUI : MonoBehaviour
         if (GameManager.Instance != null)
         {
             goldText.text = GameManager.Instance.gold.ToString("N0");
-            stoneText.text = GameManager.Instance.stones.ToString("N0");
+            stoneText.text = GameManager.Instance.stone.ToString("N0");
         }
     }
 }

@@ -915,16 +915,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
-    m_Left: 16
-    m_Right: 16
-    m_Top: 8
-    m_Bottom: 8
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 6
   m_Viewport: {fileID: 6421170629446209296}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -2219,15 +2219,13 @@ MonoBehaviour:
   itemLevelText: {fileID: 8527330647201311582}
   itemTierText: {fileID: 7192450376747666399}
   growthCostText: {fileID: 5544691186001682173}
+  entireRestoreCostText: {fileID: 6666031545791325420}
   closeButton: {fileID: 8972825057645073498}
   growthAttemptButton: {fileID: 584749274254804916}
-  growthLevelText: {fileID: 0}
-  upgradeProbText: {fileID: 0}
-  container: {fileID: 0}
-  statStack: {fileID: 0}
-  row: 17
+  entireRestoreButton: {fileID: 2518125082129857253}
+  container: {fileID: 2085065369845726473}
+  statStack: {fileID: 7835448474073286003, guid: a2cbae508d204ca4eaadaa16538ba36e, type: 3}
   statStacks: []
-  statNames: []
 --- !u!1 &8175748106915114274
 GameObject:
   m_ObjectHideFlags: 0

@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Test\TestAddItem.cs" />
     <Compile Include="Assets\Scripts\ScriptableObject\ItemData.cs" />
     <Compile Include="Assets\Scripts\ScriptableObject\UpgradeProfile.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObject\GrowthProfile.cs" />
     <Compile Include="Assets\Scripts\UI\EquipmentUI.cs" />
     <Compile Include="Assets\Scripts\UI\MessageUI.cs" />
     <Compile Include="Assets\Scripts\UI\StatusUI.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Assets\Scripts\UI\GrowthUI.cs" />
     <Compile Include="Assets\Scripts\UI\UpgradeUI.cs" />
     <Compile Include="Assets\Scripts\Singleton\InventoryManager.cs" />
+    <Compile Include="Assets\Scripts\UI\GrowthStackUI.cs" />
     <Compile Include="Assets\Scripts\ScriptableObject\UpgradeConfig.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\Singleton\GameManager.cs" />

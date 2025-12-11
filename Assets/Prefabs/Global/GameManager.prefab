@@ -45,6 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b551999748a58114a993a182b020341e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  singletonList:
+  - {fileID: 4286044387077810003, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
+  - {fileID: 8443570756488082349, guid: cf58ca26d69faf147be346f41138d592, type: 3}
+  _gold: 90000
+  _stone: 9999999
 --- !u!114 &-8668483026998753280
 MonoBehaviour:
   m_ObjectHideFlags: 0

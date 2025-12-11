@@ -10,7 +10,7 @@ public struct UpgradeData
     public long cumulativeCost;     // 누적 기댓값 (판매가 계산용)
 }
 
-[CreateAssetMenu(fileName = "UpgradeConfig", menuName = "Scripts/Data/UpgradeConfig")]
+[CreateAssetMenu(fileName = "UpgradeConfig", menuName = "Scriptable Objects/UpgradeConfig")]
 public class UpgradeConfig : ScriptableObject
 {
     public static UpgradeConfig Instance // 유사 싱글톤

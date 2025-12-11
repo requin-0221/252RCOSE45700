@@ -134,8 +134,56 @@ public class InventoryManager : MonoBehaviour
             OnInventoryChanged();
             return true;
         }
-        UIManager.Instance.RefreshAllUI();
+        UIManager.Instance.RefreshResourceUI();
         return false;
+    }
+
+    public void GrowingAttempt(ItemInstance item)
+    {
+        if (item == null) return;
+
+        // 성장 비용 계산
+        int cost = item.GetGrowthCost();
+
+        // 성장 비용 지불
+        GameManager.Instance.AddStone(-1 * cost);
+        Debug.Log($"성장 : {item.data.itemName} (-{cost} Stone)");
+
+        item.Growing();
+        OnInventoryChanged();
+    }
+
+    public void GrowthStackRestore(ItemInstance item, StatType type)
+    {
+        if (item == null) return;
+        if (!item.growthStacks.ContainsKey(type)) return;
+
+        int stackNum = item.growthStacks[type];
+
+        // 초기화 비용 계산
+        long cost = item.GetGrowthStackRestoreCost(stackNum);
+
+        // 초기화 비용 지불
+        GameManager.Instance.AddGold(-1 * cost);
+        Debug.Log($"스택 초기화 : {item.data.itemName} (-{cost} Gold)");
+
+        item.GrowthStackRestore(type);
+        OnInventoryChanged();
+    }
+
+    public void GrowthEntireRestore(ItemInstance item)
+    {
+        if (item == null) return;
+
+        // 초기화 가격 계산
+        long cost = item.GetEntireRestoreCost();
+
+        // 초기화 비용 지불
+        GameManager.Instance.AddGold(-1 * cost);
+        Debug.Log($"전체 스택 초기화 : {item.data.itemName} (-{cost} Gold)");
+
+        item.GrowthEntireRestore();
+        OnInventoryChanged();
     }
 
     private void OnInventoryChanged()

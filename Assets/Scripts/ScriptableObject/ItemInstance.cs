@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using Unity;
 using UnityEngine;
 using static UnityEditor.Progress;
@@ -15,6 +16,7 @@ public class ItemInstance
     // 상태
     public int upgradeLv;   // 일반 강화 레벨
     public int growthLv;    // 성장 레벨(총 스택)
+    public readonly int maxGrowthStackLv = 15; // 스택 당 최대 성장 단계
 
     // 성장 능력치 스택 (Key: 능력치, Value: 스택 수)
     public Dictionary<StatType, int> growthStacks;
@@ -52,7 +54,7 @@ public class ItemInstance
 
             baseStats[i] = data.GetBaseStatValue(type);
             //upgradeStats[i] = 10;
-            growthStats[i] = 10;
+            //growthStats[i] = 10;
             totalStats[i] = baseStats[i] + upgradeStats[i] + growthStats[i];
         }
     }
@@ -65,6 +67,25 @@ public class ItemInstance
     public long GetUpgradeCost()
     {
         return (long)Mathf.Floor(UpgradeConfig.Instance.GetUpgradeCost(upgradeLv) * Mathf.Sqrt(data.itemTier));
+    }
+
+    public int GetGrowthCost()
+    {
+        return (int)Mathf.Floor((growthLv + 1) * 100 * Mathf.Sqrt(data.itemTier));
+    }
+
+    public long GetGrowthStackRestoreCost(int stackNum)
+    {
+        if (stackNum <= 0) return 0;
+
+        stackNum = Mathf.Clamp(stackNum, 1, 15);
+        return (long)Mathf.Floor(100f * Mathf.Pow(data.itemTier, 1.5f) * Mathf.Pow((growthLv-stackNum+1), 2f));
+    }
+
+    public long GetEntireRestoreCost()
+    {
+        if (growthLv <= 0) return 0;
+        return (long)Mathf.Floor(100f * Mathf.Pow(data.itemTier, 1.5f) * growthLv * growthLv);
     }
 
     public long GetSellPrice()
@@ -90,6 +111,75 @@ public class ItemInstance
         }
 
         upgradeLv++;
+        calculateStats();
+    }
+
+    public void Growing()
+    {
+        if (growthLv >= data.maxGrowth) return;
+
+        // 무작위로 성장할 스탯 결정
+        int statCount = data.growthProfile.rules.Count;
+        int i;        
+        StatType type;
+
+        while (true) 
+        {
+            i = UnityEngine.Random.Range(0, statCount);
+            type = data.growthProfile.rules[i].statType;
+
+            // 아직 스택이 없는 능력치인지 검사
+            if (growthStacks.ContainsKey(type) == false)
+            {
+                growthStacks.Add(type, 1);
+                Debug.Log($"성장 스택 새로 추가됨 : {type.ToString()}");
+                break;
+            }
+
+            if (growthStacks[type] < maxGrowthStackLv)
+            {
+                growthStacks[type]++;
+                break;
+            }
+        }
+
+        float value = data.growthProfile.rules[i].values[growthStacks[type]];
+
+        if (type == StatType.MaxHp || type == StatType.Def ||
+            type == StatType.PAtk || type == StatType.MAtk)
+        {
+            value *= (1 + data.itemTier / 6);
+        }
+        else
+        {
+            value += data.itemTier / 6;
+        }
+
+        growthStats[(int)type] += value;
+
+        growthLv++;
+        calculateStats();
+    }
+
+    public void GrowthStackRestore(StatType type)
+    {
+        if (!growthStacks.ContainsKey(type)) return;
+
+        growthStats[(int)type] = 0;
+        growthLv -= growthStacks[type];
+        growthStacks.Remove(type);
+        calculateStats();
+    }
+
+    public void GrowthEntireRestore()
+    {
+        growthLv = 0;
+        for (int i = 0; i < growthStats.Length; i++)
+        {
+            growthStats[i] = 0;
+        }
+        
+        growthStacks.Clear();
         calculateStats();
     }
 }

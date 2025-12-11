@@ -28,8 +28,7 @@ public class UpgradeUI : MonoBehaviour
     public GameObject statLine; // StatLine Prefab
     [SerializeField] List<GameObject> statLines;
 
-    [Header("StatType Name List")]
-    public List<StatName> statNames;
+    private long upgradeCost = 0;
 
     private void Awake()
     {
@@ -49,6 +48,15 @@ public class UpgradeUI : MonoBehaviour
         upgradeAttemptButton.onClick.AddListener(OnClickUpgradeAttemptButton);
 
         disable();
+    }
+
+    void Update()
+    {
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.gold < upgradeCost) { upgradeCostText.color = Color.gray; }
+            else { upgradeCostText.color = Color.white; }
+        }
     }
 
     public void disable()
@@ -73,7 +81,7 @@ public class UpgradeUI : MonoBehaviour
             return;
         }
 
-        long upgradeCost = (long)Mathf.Floor(UpgradeConfig.Instance.GetUpgradeCost(item.upgradeLv) * Mathf.Sqrt(item.data.itemTier));
+        upgradeCost = (long)Mathf.Floor(UpgradeConfig.Instance.GetUpgradeCost(item.upgradeLv) * Mathf.Sqrt(item.data.itemTier));
 
         itemIcon.sprite = item.data.icon;
         itemNameText.text = item.data.itemName;
@@ -85,23 +93,15 @@ public class UpgradeUI : MonoBehaviour
         }
         if (item.upgradeLv >= item.data.maxUpgrade)
         {
+            upgradeCost = 0;
             upgradeCostText.text = "강화 비용 : -";
             upgradeProbText.text = "-";
-        }
-        else
-        {
-            upgradeCostText.text = "강화 비용 : " + upgradeCost.ToString("N0");
-            if (GameManager.Instance.gold < upgradeCost) { upgradeCostText.color = Color.gray; }
-            upgradeProbText.text = "성공 확률 : " + (UpgradeConfig.Instance.GetSuccessProb(item.upgradeLv)*100).ToString("F0") + "%";
-        }
-
-        // 강화 증가 스탯 부분
-        if (item.upgradeLv >= item.data.maxUpgrade)
-        {
             upgradeLevelText.text = $"+{item.upgradeLv} (MAX)";
         }
         else
         {
+            upgradeCostText.text = "강화 비용 : " + upgradeCost.ToString("N0");
+            upgradeProbText.text = "성공 확률 : " + (UpgradeConfig.Instance.GetSuccessProb(item.upgradeLv)*100).ToString("F0") + "%";
             upgradeLevelText.text = $"+{item.upgradeLv}    ▶    <color=#FFFF00>+{item.upgradeLv + 1}</color>";
         }
 
@@ -174,7 +174,6 @@ public class UpgradeUI : MonoBehaviour
 
             // 스탯 이름
             string t = GetStatTypeName(_type);
-            if (t == null) t = "(Error)";
             t += " : ";
 
             string typeName = _type.ToString();
@@ -209,11 +208,14 @@ public class UpgradeUI : MonoBehaviour
         statLines.Clear();
     }
 
-    string GetStatTypeName(StatType type)
+    private string GetStatTypeName(StatType type)
     {
-        if (statNames[(int)type].name != null)
-            return statNames[(int)type].name;
-        return null;
+        if (UIManager.Instance == null)
+        {
+            Debug.Log("UpgradeUI : UIManager is null");
+            return "(Error)";
+        }
+        return UIManager.Instance.statNamesList[(int)type].name;
     }
 
     private void OnClickCloseButton()

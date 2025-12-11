@@ -142,31 +142,38 @@ public class ItemDataImporter : EditorWindow
             item.attackType = AttackType.Physical;
 
         // UpgradeProfile
-        string upgradeProfileType = data[headerMap["UpgradeProfile"]];
+        string ProfileType = data[headerMap["Profile"]];
         string upgradeProfilePath = "Data/Upgrade/UpgradeProfile";
-        switch(upgradeProfileType)
+        string growthProfilePath = "Data/Growth/GrowthProfile";
+        switch(ProfileType)
         {
             case "방어구":
                 upgradeProfilePath = upgradeProfilePath + "Armor";
+                growthProfilePath = growthProfilePath + "Armor";
                 break;
 
             case "장신구":
                 upgradeProfilePath = upgradeProfilePath + "Accessory";
+                growthProfilePath = growthProfilePath + "Accessory";
                 break;
 
             case "무기":
                 upgradeProfilePath = upgradeProfilePath + "Weapon";
+                growthProfilePath = growthProfilePath + "Weapon";
                 break;
 
             case "보조무기":
                 upgradeProfilePath = upgradeProfilePath + "Subweapon";
+                growthProfilePath = growthProfilePath + "Subweapon";
                 break;
 
             default:
                 upgradeProfilePath = upgradeProfilePath + "Armor";
+                growthProfilePath = growthProfilePath + "Armor";
                 break;
         }
         item.upgradeProfile = Resources.Load<UpgradeProfile>(upgradeProfilePath);
+        item.growthProfile = Resources.Load<GrowthProfile>(growthProfilePath);
 
         // 스탯 리스트 처리
         item.baseStats = new List<StatData>();

@@ -9,7 +9,7 @@ public struct StatIncreaseList
     public float[] values;
 }
 
-[CreateAssetMenu(fileName = "UpgradeProfile", menuName = "Scripts/Data/UpgradeProfile")]
+[CreateAssetMenu(fileName = "UpgradeProfile", menuName = "Scriptable Objects/UpgradeProfile")]
 public class UpgradeProfile : ScriptableObject
 {
     [Header("강화 규칙 목록")]

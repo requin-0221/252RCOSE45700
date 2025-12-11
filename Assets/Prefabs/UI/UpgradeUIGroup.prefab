@@ -729,8 +729,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 32, y: 48}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 32, y: 40}
+  m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &4668825228958732739
 CanvasRenderer:
@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 6
   m_Viewport: {fileID: 6421170629446209296}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -1806,8 +1806,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 72, y: 48}
-  m_SizeDelta: {x: 384, y: 32}
+  m_AnchoredPosition: {x: 96, y: 48}
+  m_SizeDelta: {x: 368, y: 32}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3893578600733726576
 CanvasRenderer:
@@ -1837,7 +1837,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC15\uD654 \uBE44\uC6A9 : 128,000,000"
+  m_text: "\uAC15\uD654 \uBE44\uC6A9 : 00,000,000,000"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 30c4ddda779771c4a8fa97e28a775040, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 9772e8698a6a9fc4ba03490a921d3b7b, type: 2}
@@ -1984,47 +1984,7 @@ MonoBehaviour:
   upgradeProbText: {fileID: 6234473641618929462}
   container: {fileID: 2085065369845726473}
   statLine: {fileID: 91960982408172488, guid: fbd7f7b63445bc5408d3fc7572077685, type: 3}
-  row: 12
   statLines: []
-  statNames:
-  - statType: 0
-    name: "\uACF5\uACA9 \uC18D\uB3C4"
-  - statType: 1
-    name: "\uCD5C\uB300 HP"
-  - statType: 2
-    name: "\uBC29\uC5B4\uB825"
-  - statType: 3
-    name: "\uBB3C\uB9AC \uACF5\uACA9\uB825"
-  - statType: 4
-    name: "\uB9C8\uBC95 \uACF5\uACA9\uB825"
-  - statType: 9
-    name: "\uBB3C\uB9AC \uD53C\uD574\uB7C9%"
-  - statType: 10
-    name: "\uB9C8\uBC95 \uD53C\uD574\uB7C9%"
-  - statType: 11
-    name: "\uCD94\uAC00 \uD53C\uD574\uB7C9%"
-  - statType: 17
-    name: "\uCE58\uBA85\uD0C0 \u25B2"
-  - statType: 16
-    name: "\uBC29\uC5B4 \uAD00\uD1B5 \u25B2"
-  - statType: 18
-    name: "\uC2A4\uD0AC \uAC15\uD654 \u25B2"
-  - statType: 5
-    name: "\uCD5C\uB300 HP%"
-  - statType: 6
-    name: "\uBC29\uC5B4\uB825%"
-  - statType: 7
-    name: "\uBB3C\uB9AC \uACF5\uACA9\uB825%"
-  - statType: 8
-    name: "\uB9C8\uBC95 \uACF5\uACA9\uB825%"
-  - statType: 12
-    name: "\uCE58\uBA85\uD0C0 \uD53C\uD574\uB7C9%"
-  - statType: 13
-    name: "\uC2A4\uD0AC \uC790\uC6D0 \uD68D\uB4DD%"
-  - statType: 14
-    name: "\uC544\uC774\uD15C \uD68D\uB4DD%"
-  - statType: 15
-    name: "\uC7AC\uD654 \uD68D\uB4DD%"
 --- !u!1 &7937899787707321854
 GameObject:
   m_ObjectHideFlags: 0

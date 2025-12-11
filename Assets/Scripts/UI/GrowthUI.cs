@@ -16,30 +16,43 @@ public class GrowthUI : MonoBehaviour
     public TextMeshProUGUI itemLevelText;
     public TextMeshProUGUI itemTierText;
     public TextMeshProUGUI growthCostText;
+    public TextMeshProUGUI entireRestoreCostText;
 
     [Header("Button")]
     [SerializeField] Button closeButton;
     [SerializeField] Button growthAttemptButton;
+    [SerializeField] Button entireRestoreButton;
 
     [Header("Stacks field")]
     public Transform container; // Container
-    public GameObject statStack; // StatStacks Prefab
-    [SerializeField] List<GameObject> statStacks;
+    public GrowthStackUI statStack; // StatStacks Prefab
+    public List<GrowthStackUI> statStacks;
 
-    [Header("StatType Name List")]
-    public List<StatName> statNames;
+    private int growthCost = 0;
+    private long entireRestoreCost = 0;
 
     private void Awake()
     {
         if (growthGroup == null) growthGroup = GetComponent<CanvasGroup>();
         
-        // 
-
         // 버튼에 리스너 연결
         closeButton.onClick.AddListener(OnClickCloseButton);
-        growthAttemptButton.onClick.AddListener(OnClickUpgradeAttemptButton);
+        growthAttemptButton.onClick.AddListener(OnClickGrowthAttemptButton);
+        entireRestoreButton.onClick.AddListener(OnClickEntireRestoreButton);
 
         disable();
+    }
+
+    void Update()
+    {
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.gold < entireRestoreCost) { entireRestoreCostText.color = Color.gray; }
+            else { entireRestoreCostText.color = Color.white; }
+
+            if (GameManager.Instance.gold < growthCost) { growthCostText.color = Color.gray; }
+            else { growthCostText.color = Color.white; }
+        }
     }
 
     public void disable()
@@ -64,7 +77,9 @@ public class GrowthUI : MonoBehaviour
             return;
         }
 
-        long upgradeCost = (long)Mathf.Floor(UpgradeConfig.Instance.GetUpgradeCost(item.upgradeLv) * Mathf.Sqrt(item.data.itemTier));
+        // 성장 비용 계산
+        growthCost = item.GetGrowthCost();
+        entireRestoreCost = item.GetEntireRestoreCost();
 
         itemIcon.sprite = item.data.icon;
         itemNameText.text = item.data.itemName;
@@ -74,24 +89,33 @@ public class GrowthUI : MonoBehaviour
         {
             itemTierText.color = UIManager.Instance.tierColorList[item.data.itemTier - 1];
         }
-        if (item.upgradeLv >= item.data.maxUpgrade)
+
+        if (item.growthLv >= item.data.maxGrowth)
         {
-            growthCostText.text = "강화 비용 : -";
+            growthCostText.text = "필요 마석 : -";
         }
         else
         {
-            growthCostText.text = "강화 비용 : " + upgradeCost.ToString("N0");
-            if (GameManager.Instance.gold < upgradeCost) { growthCostText.color = Color.gray; }
+            growthCostText.text = "필요 마석 : " + growthCost.ToString("N0");
         }
 
-        UpdateStatLine(item);
+        if (item.growthLv == 0)
+        {
+            entireRestoreCostText.text = "전체 초기화 비용 : -";
+        }
+        else
+        {
+            entireRestoreCostText.text = "전체 초기화 비용 : " + entireRestoreCost.ToString("N0");
+        }
+
+        UpdateStatStacks(item);
     }
 
-    void OnClickUpgradeAttemptButton()
+    void OnClickGrowthAttemptButton()
     {
         if (UIManager.Instance == null || InventoryManager.Instance == null)
         {
-            Debug.Log("UIManager or InventoryManager is null");
+            Debug.Log("GrowthUI : UIManager or InventoryManager is null");
             return;
         }
 
@@ -104,95 +128,128 @@ public class GrowthUI : MonoBehaviour
             return;
         }
 
-        if (item.upgradeLv >= item.data.maxUpgrade)
+        if (item.growthLv >= item.data.maxGrowth)
         {
-            UIManager.Instance.ShowPopup("더 이상 강화할 수 없습니다.");
+            UIManager.Instance.ShowPopup("최대 성장 단계에 도달했습니다.");
             return;
         }
 
-        long upgradeCost = item.GetUpgradeCost();
+        int cost = item.GetGrowthCost();
 
-        if (GameManager.Instance.gold < upgradeCost)
+        if (GameManager.Instance.stone < cost)
         {
-            UIManager.Instance.ShowPopup("재화가 부족합니다.");
+            UIManager.Instance.ShowPopup("마석이 부족합니다.");
             return;
         }
 
-        if (InventoryManager.Instance.UpgradeAttempt(item)) // 강화 성공
-        {
-            UIManager.Instance.ShowPopup("강화가 성공했습니다.");
-        } else
-        {
-            UIManager.Instance.ShowPopup("강화가 실패했습니다.");
-        }
+        InventoryManager.Instance.GrowingAttempt(item);
     }
 
-    void UpdateStatLine(ItemInstance item)
+    void UpdateStatStacks(ItemInstance item)
     {
-        ClearLineTexts();
-
-        if (item.upgradeLv >= item.data.maxUpgrade)
+        if (statStacks.Count < item.growthStacks.Count)
         {
-            CreateLineText("최대 강화 단계에 도달했습니다");
-            return;
+            for (int i = statStacks.Count; i < item.growthStacks.Count; i++)
+            {
+                GrowthStackUI stackObj = Instantiate(statStack, container);
+                stackObj.SetParent(this);
+                statStacks.Add(stackObj);
+            }
+        }
+        else
+        {
+            for (int i = statStacks.Count - 1; i >= item.growthStacks.Count; i--)
+            {
+                Destroy(statStacks[i].gameObject);
+                statStacks.RemoveAt(i);
+            }
         }
 
-        string temp = null;
-        foreach (var rule in item.data.upgradeProfile.rules)
+        int n = 0;
+
+        foreach (var stack in item.growthStacks)
         {
-            StatType _type = rule.statType;
-            float value = rule.values[item.upgradeLv];
+            StatType _type = stack.Key;
+            int stackNum = stack.Value;
+            float value = item.growthStats[(int)_type];
 
-            if (value == 0) continue;
-
+            /*
             if (_type == StatType.MaxHp || _type == StatType.Def ||
                 _type == StatType.PAtk || _type == StatType.MAtk)
             {
                 value = Mathf.Floor(value * Mathf.Sqrt(item.data.itemTier));
             }
+            */
 
-            // 스탯 이름
-            string t = GetStatTypeName(_type);
-            if (t == null) t = "(Error)";
-            t += " : ";
-
-            string typeName = _type.ToString();
-            if (typeName.EndsWith("Percent"))
-            {
-                temp = value.ToString("F0") + "%";
-            }
-            else
-            {
-                temp = value.ToString("F0");
-            }
-            t += $"<color=#ffff00>+{temp}</color>";
-
-            CreateLineText(t);
+            statStacks[n++].SetData(_type, value, stackNum, item.GetGrowthStackRestoreCost(stackNum));
         }
     }
 
-    void CreateLineText(string t)
+    public bool OnClickRestoreButton(StatType type)
     {
-        GameObject lineObj = Instantiate(statStack, container);
-        lineObj.GetComponent<TextMeshProUGUI>().text = t;
-        lineObj.GetComponent<TextMeshProUGUI>().fontSize = 32;
-        statStacks.Add(lineObj);
-    }
-
-    void ClearLineTexts()
-    {
-        foreach (var line in statStacks)
+        if (UIManager.Instance == null || InventoryManager.Instance == null)
         {
-            Destroy(line);
+            Debug.Log("GrowthUI : UIManager or InventoryManager is null");
+            return false;
         }
-        statStacks.Clear();
+
+        // 아이템 확인
+        ItemInstance item = UIManager.Instance.CurrSlot._item;
+
+        if (item == null)
+        {
+            Debug.Log("빈 슬롯 오류");
+            return false;
+        }
+
+        int stackNum = item.growthStacks[type];
+
+        long restoreCost = item.GetGrowthStackRestoreCost(stackNum);
+
+        if (GameManager.Instance.gold < restoreCost)
+        {
+            UIManager.Instance.ShowPopup("재화가 부족합니다.");
+            return false;
+        }
+
+        InventoryManager.Instance.GrowthStackRestore(item, type);
+        UIManager.Instance.ShowPopup("선택한 성장 스택이 초기화되었습니다.");
+        return true;
     }
 
-    string GetStatTypeName(StatType type)
+    public void OnClickEntireRestoreButton()
     {
-        if (statNames[(int)type].name != null)
-            return statNames[(int)type].name;
-        return null;
+        if (UIManager.Instance == null || InventoryManager.Instance == null)
+        {
+            Debug.Log("GrowthUI : UIManager or InventoryManager is null");
+            return;
+        }
+
+        // 아이템 확인
+        ItemInstance item = UIManager.Instance.CurrSlot._item;
+
+        if (item == null)
+        {
+            Debug.Log("빈 슬롯 오류");
+            return;
+        }
+
+        if (item.growthLv <= 0)
+        {
+            UIManager.Instance.ShowPopup("아직 성장하지 않은 아이템입니다.");
+            return;
+        }
+
+        long restoreCost = item.GetEntireRestoreCost();
+
+        if (GameManager.Instance.gold < restoreCost)
+        {
+            UIManager.Instance.ShowPopup("재화가 부족합니다.");
+            return;
+        }
+
+        InventoryManager.Instance.GrowthEntireRestore(item);
+        UIManager.Instance.ShowPopup("모든 성장 스택이 초기화되었습니다.");
     }
 
     private void OnClickCloseButton()

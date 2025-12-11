@@ -73,3 +73,42 @@ MonoBehaviour:
   - {r: 1, g: 0.7490196, b: 0.49803922, a: 1}
   - {r: 0.7490196, g: 0.49803922, b: 1, a: 1}
   - {r: 0.7490196, g: 0.49803922, b: 1, a: 1}
+  _statNamesList:
+  - statType: 0
+    name: "\uACF5\uACA9 \uC18D\uB3C4"
+  - statType: 1
+    name: "\uCD5C\uB300 HP"
+  - statType: 2
+    name: "\uBC29\uC5B4\uB825"
+  - statType: 3
+    name: "\uBB3C\uB9AC \uACF5\uACA9\uB825"
+  - statType: 4
+    name: "\uB9C8\uBC95 \uACF5\uACA9\uB825"
+  - statType: 9
+    name: "\uBB3C\uB9AC \uD53C\uD574\uB7C9%"
+  - statType: 10
+    name: "\uB9C8\uBC95 \uD53C\uD574\uB7C9%"
+  - statType: 11
+    name: "\uCD94\uAC00 \uD53C\uD574\uB7C9%"
+  - statType: 17
+    name: "\uCE58\uBA85\uD0C0 \u25B2"
+  - statType: 16
+    name: "\uBC29\uC5B4 \uAD00\uD1B5 \u25B2"
+  - statType: 18
+    name: "\uC2A4\uD0AC \uAC15\uD654 \u25B2"
+  - statType: 5
+    name: "\uCD5C\uB300 HP%"
+  - statType: 6
+    name: "\uBC29\uC5B4\uB825%"
+  - statType: 7
+    name: "\uBB3C\uB9AC \uACF5\uACA9\uB825%"
+  - statType: 8
+    name: "\uB9C8\uBC95 \uACF5\uACA9\uB825%"
+  - statType: 12
+    name: "\uCE58\uBA85\uD0C0 \uD53C\uD574\uB7C9%"
+  - statType: 13
+    name: "\uC2A4\uD0AC \uC790\uC6D0 \uD68D\uB4DD%"
+  - statType: 14
+    name: "\uC544\uC774\uD15C \uD68D\uB4DD%"
+  - statType: 15
+    name: "\uC7AC\uD654 \uD68D\uB4DD%"

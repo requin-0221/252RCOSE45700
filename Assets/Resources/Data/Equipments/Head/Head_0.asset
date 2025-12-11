@@ -34,3 +34,4 @@ MonoBehaviour:
   - statType: 12
     value: 3
   upgradeProfile: {fileID: 11400000, guid: c36753d98abe3084283aa2dc8cac8873, type: 2}
+  growthProfile: {fileID: 11400000, guid: aaab89e41b5acb84a8bdf544b789068e, type: 2}
