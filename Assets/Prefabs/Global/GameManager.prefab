@@ -48,8 +48,10 @@ MonoBehaviour:
   singletonList:
   - {fileID: 4286044387077810003, guid: c3b91d0bd39909a428f588eb540a7d08, type: 3}
   - {fileID: 8443570756488082349, guid: cf58ca26d69faf147be346f41138d592, type: 3}
-  _gold: 90000
-  _stone: 9999999
+  - {fileID: 4710091517308691382, guid: 5ae76559e7642be4ebb81d082b92debf, type: 3}
+  _gold: 0
+  _stone: 0
+  isInventoryMode: 0
 --- !u!114 &-8668483026998753280
 MonoBehaviour:
   m_ObjectHideFlags: 0

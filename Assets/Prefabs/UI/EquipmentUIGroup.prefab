@@ -224,6 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6950779244843963905}
   - component: {fileID: 2447171140929453215}
+  - component: {fileID: 6939341217257074530}
   m_Layer: 5
   m_Name: EquipmentUIGroup
   m_TagString: Untagged
@@ -264,6 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b333c22bd2fbac44c8fca4f5738c7da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentUI
+  upgradeGroup: {fileID: 6939341217257074530}
   slotMappings:
   - slotType: 1
     slotScript: {fileID: 2000327248520109107}
@@ -291,6 +293,18 @@ MonoBehaviour:
     slotScript: {fileID: 849983018787601590}
   - slotType: 13
     slotScript: {fileID: 2466352758720304118}
+--- !u!225 &6939341217257074530
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5119290616823596818}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5193972300707995364
 GameObject:
   m_ObjectHideFlags: 0

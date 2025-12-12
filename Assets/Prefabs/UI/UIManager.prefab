@@ -44,12 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f74aca4a9c9841643a8b70638c21610a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  isInventoryMode: 1
   inventoryUI: {fileID: 0}
   itemInfo: {fileID: 0}
   resourceUI: {fileID: 0}
   equipmentUI: {fileID: 0}
   statusUI: {fileID: 0}
   upgradeUI: {fileID: 0}
+  growthUI: {fileID: 0}
+  changeLayoutButton: {fileID: 0}
+  changeLayoutButton_inventory: {fileID: 449267543999617272, guid: 32d746028691a1e49a9331b220c4ffbf, type: 3}
+  changeLayoutButton_battle: {fileID: 3418393454829847516, guid: 9cebd0d646bf0e1479aec1e296119032, type: 3}
+  backgroundYellow: {fileID: 0}
   messageGroupPrefab: {fileID: 7554818893794986244, guid: c6474172898557c4bb7ab917f8e982a7, type: 3}
   popupParent: {fileID: 0}
   _tierColorList:

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 public class EquipmentUI : MonoBehaviour
 {
+    [Header("Canvas Group")]
+    [SerializeField] CanvasGroup upgradeGroup;
+
     // 인스펙터 표시
     [System.Serializable]
     public struct SlotMapping
@@ -20,6 +23,8 @@ public class EquipmentUI : MonoBehaviour
 
     private void Awake()
     {
+        if (upgradeGroup == null) upgradeGroup = GetComponent<CanvasGroup>();
+
         // 리스트를 딕셔너리로 변환 (검색 속도 최적화)
         foreach (var mapping in slotMappings)
         {
@@ -28,6 +33,20 @@ public class EquipmentUI : MonoBehaviour
                 uiSlotLookup.Add(mapping.slotType, mapping.slotScript);
             }
         }
+    }
+
+    public void disable()
+    {
+        upgradeGroup.alpha = 0f;
+        upgradeGroup.interactable = false;
+        upgradeGroup.blocksRaycasts = false;
+    }
+
+    public void enable()
+    {
+        upgradeGroup.alpha = 1f;
+        upgradeGroup.interactable = true;
+        upgradeGroup.blocksRaycasts = true;
     }
 
     private void OnEnable()

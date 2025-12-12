@@ -608,6 +608,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3846765690410435305}
   - component: {fileID: 5934506301292639000}
+  - component: {fileID: 216212423003825708}
   m_Layer: 5
   m_Name: InventoryUIGroup
   m_TagString: Untagged
@@ -648,10 +649,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3eaac71255db340ac16cc0591056de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
+  upgradeGroup: {fileID: 216212423003825708}
   content: {fileID: 5925044720064148605}
   slot: {fileID: 3011882181784554032, guid: 8e7c29890627698459e8cf7eb43db9a4, type: 3}
   minSlots: 24
   slotsPerRow: 8
+--- !u!225 &216212423003825708
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4482200735481182772}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5119019769805207506
 GameObject:
   m_ObjectHideFlags: 0

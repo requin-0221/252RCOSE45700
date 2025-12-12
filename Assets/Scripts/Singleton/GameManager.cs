@@ -57,6 +57,9 @@ public enum StatType
     GoldDropPercent,    // ¿Á»≠ »πµÊ »Æ∑¸ % (¿ÂΩ≈±∏)
 }
 
+// ∫∏Ω∫ ≥≠¿Ãµµ
+public enum BossDifficulty { Easy, Normal, Hard, }
+
 
 public class GameManager : MonoBehaviour
 {
@@ -94,7 +97,10 @@ public class GameManager : MonoBehaviour
             StoneChanged();
         }
     }
-    const int maxStone = 99999999;
+    const int maxStone = 999999999;
+
+    [Header("Lobby Layout mode")]
+    public bool isInventoryMode = false;
 
     private void Awake()
     {

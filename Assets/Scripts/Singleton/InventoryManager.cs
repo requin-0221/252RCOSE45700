@@ -200,6 +200,6 @@ public class InventoryManager : MonoBehaviour
             UIManager.Instance.SelectSlot(UIManager.Instance.CurrSlot);
             return;
         }
-        UIManager.Instance.DeselectAll();
+        UIManager.Instance.DeselectSlot();
     }
 }

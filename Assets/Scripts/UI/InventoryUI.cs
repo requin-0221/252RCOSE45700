@@ -3,11 +3,33 @@ using System.Collections.Generic;
 
 public class InventoryUI : MonoBehaviour
 {
+    [Header("Canvas Group")]
+    [SerializeField] CanvasGroup upgradeGroup;
+
     public Transform content; // ScrollViewÀÇ Content
     public GameObject slot;   // ½½·Ô ÇÁ¸®ÆÕ
 
     public int minSlots = 24;       // ±âº» ½½·Ô °³¼ö (40)
     public int slotsPerRow = 8;     // ÇÑ ÁÙ´ç ½½·Ô °³¼ö (8)
+
+    private void Awake()
+    {
+        if (upgradeGroup == null) upgradeGroup = GetComponent<CanvasGroup>();
+    }
+
+    public void disable()
+    {
+        upgradeGroup.alpha = 0f;
+        upgradeGroup.interactable = false;
+        upgradeGroup.blocksRaycasts = false;
+    }
+
+    public void enable()
+    {
+        upgradeGroup.alpha = 1f;
+        upgradeGroup.interactable = true;
+        upgradeGroup.blocksRaycasts = true;
+    }
 
     void OnEnable()
     {
@@ -44,7 +66,7 @@ public class InventoryUI : MonoBehaviour
             {
                 if (UIManager.Instance.CurrSlot == InventoryManager.Instance.slots[i])
                 {
-                    UIManager.Instance.DeselectAll();
+                    UIManager.Instance.DeselectSlot();
                 }
                 Destroy(InventoryManager.Instance.slots[i].transform.gameObject);
                 InventoryManager.Instance.slots.RemoveAt(i);
