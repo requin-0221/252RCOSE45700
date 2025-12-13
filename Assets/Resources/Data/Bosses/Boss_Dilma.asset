@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86fa01d0f2dbdc49a72a84c5ea2a6e5, type: 3}
+  m_Name: Boss_Dilma
+  m_EditorClassIdentifier: Assembly-CSharp::BossData
+  bossName: "\uB51C\uB9C8"
+  bossSprite: {fileID: 21300000, guid: 84059c2380a6a7a42b5d7be27c29b409, type: 3}
+  difficultyList:
+  - difficulty: 0
+    spec:
+      maxHp: 500000
+      maxShield: 0
+      atk: 0
+      def: 1000
+      goldReward: 50000
+      stoneReward: 200
+  - difficulty: 1
+    spec:
+      maxHp: 3000000
+      maxShield: 0
+      atk: 100
+      def: 2000
+      goldReward: 200000
+      stoneReward: 800
+  - difficulty: 2
+    spec:
+      maxHp: 300000000
+      maxShield: 100000000
+      atk: 400
+      def: 5000
+      goldReward: 2400000
+      stoneReward: 6000

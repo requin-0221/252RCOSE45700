@@ -44,4 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead1167ddc130434382d4f787a3b5707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossManager
-  bossList: []
+  difficulty: 0
+  _bossList:
+  - {fileID: 11400000, guid: c9ca890d097163740881090e9fb76e15, type: 2}
+  - {fileID: 11400000, guid: acc68e2ede761a64a92bbc77b7c73f09, type: 2}

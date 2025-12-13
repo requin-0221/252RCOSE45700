@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86fa01d0f2dbdc49a72a84c5ea2a6e5, type: 3}
+  m_Name: Boss_Carthago
+  m_EditorClassIdentifier: Assembly-CSharp::BossData
+  bossName: "\uCE74\uB974\uD0C0\uACE0"
+  bossSprite: {fileID: 21300000, guid: 101de584cc3fbe240a20d9cefee4353d, type: 3}
+  difficultyList:
+  - difficulty: 0
+    spec:
+      maxHp: 15000000
+      maxShield: 5000000
+      atk: 200
+      def: 3000
+      goldReward: 600000
+      stoneReward: 1200
+  - difficulty: 1
+    spec:
+      maxHp: 100000000
+      maxShield: 30000000
+      atk: 300
+      def: 4000
+      goldReward: 1200000
+      stoneReward: 2000
+  - difficulty: 2
+    spec:
+      maxHp: 500000000
+      maxShield: 200000000
+      atk: 500
+      def: 6000
+      goldReward: 3500000
+      stoneReward: 10000
