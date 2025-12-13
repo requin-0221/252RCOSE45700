@@ -60,7 +60,7 @@ public class RewardInfoUI : MonoBehaviour
         maxTierText.text = $"○ 최대 장비 등급 : Tier {maxTier}";
         maxTierText.color = UIManager.Instance.tierColorList[maxTier];
 
-        countRateText.text = $"○ 최대 장비 획득 개수 : {dropCount}개 (기본 확률 : {dropRate.ToString("f2")}";
+        countRateText.text = $"○ 최대 장비 획득 개수 : {dropCount}개 (기본 확률 : {dropRate.ToString("f2")}%)";
     }
 
     public void disable()
