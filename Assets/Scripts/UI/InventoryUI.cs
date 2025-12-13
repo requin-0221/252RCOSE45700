@@ -8,6 +8,7 @@ public class InventoryUI : MonoBehaviour
 
     public Transform content; // ScrollViewÀÇ Content
     public GameObject slot;   // ½½·Ô ÇÁ¸®ÆÕ
+    public List<ItemSlot> slots = new List<ItemSlot>();
 
     public int minSlots = 24;       // ±âº» ½½·Ô °³¼ö (40)
     public int slotsPerRow = 8;     // ÇÑ ÁÙ´ç ½½·Ô °³¼ö (8)
@@ -49,42 +50,42 @@ public class InventoryUI : MonoBehaviour
         }
 
         // ÇÊ¿ä ½Ã ½½·Ô ÇÁ¸®ÆÕ »ý¼º
-        if (InventoryManager.Instance.slots.Count < neededSlots)
+        if (slots.Count < neededSlots)
         {
-            int toAdd = neededSlots - InventoryManager.Instance.slots.Count;
+            int toAdd = neededSlots - slots.Count;
             for (int i = 0; i < toAdd; i++)
             {
                 GameObject obj = Instantiate(slot, content);
                 ItemSlot slotUI = obj.GetComponent<ItemSlot>();
-                InventoryManager.Instance.slots.Add(slotUI);
+                slots.Add(slotUI);
             }
         }
         // ÇÊ¿ä ½Ã ½½·Ô ÇÁ¸®ÆÕ Á¦°Å
-        else if (InventoryManager.Instance.slots.Count > neededSlots)
+        else if (slots.Count > neededSlots)
         {
-            for (int i = InventoryManager.Instance.slots.Count-1; i >= neededSlots; i--)
+            for (int i = slots.Count-1; i >= neededSlots; i--)
             {
-                if (UIManager.Instance.CurrSlot == InventoryManager.Instance.slots[i])
+                if (UIManager.Instance.CurrSlot == slots[i])
                 {
                     UIManager.Instance.DeselectSlot();
                 }
-                Destroy(InventoryManager.Instance.slots[i].transform.gameObject);
-                InventoryManager.Instance.slots.RemoveAt(i);
+                Destroy(slots[i].transform.gameObject);
+                slots.RemoveAt(i);
             }
         }
 
         // ½½·Ô ÇÁ¸®ÆÕ °»½Å
-        for (int i = 0; i < InventoryManager.Instance.slots.Count; i++)
+        for (int i = 0; i < slots.Count; i++)
         {
             if (i < inventoryList.Count)
             {
                 // µ¥ÀÌÅÍ°¡ ÀÖ´Â Ä­ -> ¾ÆÀÌÅÛ Á¤º¸ Ç¥½Ã
-                InventoryManager.Instance.slots[i].SetItem(inventoryList[i]);
+                slots[i].SetItem(inventoryList[i]);
             }
             else
             {
                 // µ¥ÀÌÅÍ°¡ ¾ø´Â Ä­ -> ºó ½½·Ô Ã³¸®
-                InventoryManager.Instance.slots[i].ClearSlot();
+                slots[i].ClearSlot();
             }
         }
     }

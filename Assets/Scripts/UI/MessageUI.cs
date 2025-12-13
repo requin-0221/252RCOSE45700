@@ -19,6 +19,7 @@ public class MessageUI : MonoBehaviour
 
     // 콜백 함수를 저장할 변수
     private Action onButtonCallback;
+    private Action onCloseCallback;
 
     private void Awake()
     {
@@ -41,7 +42,7 @@ public class MessageUI : MonoBehaviour
         }
     }
 
-    public void Setup(string msg, Action onConfirm = null, string btnTxt = "확인", string title = "Message")
+    public void Setup(string msg, Action onConfirm = null, Action onCancle = null, string btnTxt = "확인", string title = "Message")
     {
         messageText.text = msg;
         buttonText.text = btnTxt;
@@ -49,6 +50,7 @@ public class MessageUI : MonoBehaviour
 
         // 전달받은 콜백 함수 저장
         onButtonCallback = onConfirm;
+        onCloseCallback = onCancle;
 
         // 현재 선택된 포커싱 해제
         EventSystem.current.SetSelectedGameObject(null);
@@ -63,7 +65,8 @@ public class MessageUI : MonoBehaviour
 
     private void OnCloseClicked()
     {
-        // 콜백 없이 그냥 닫기만 함
+        // 콜백 함수가 있으면 실행
+        onCloseCallback?.Invoke();
         ClosePopup();
     }
 

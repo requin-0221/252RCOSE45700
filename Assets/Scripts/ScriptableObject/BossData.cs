@@ -6,10 +6,14 @@ public struct BossSpec
 {
     public long maxHp;
     public long maxShield;
-    public long atk;
-    public long def;
+    public int atk;
+    public int def;
     public long goldReward;
     public long stoneReward;
+    public int minTier;
+    public int maxTier;
+    public float dropRate;
+    public int dropCount;
 }
 
 [System.Serializable]
@@ -24,7 +28,8 @@ public class BossData : ScriptableObject
 {
     [Header("기존 정보")]
     public string bossName;
-    public Sprite bossSprite; // CSV 파싱 시 이름으로 로드
+    public Sprite bossSprite; // 보스 일러스트
+    public Sprite bossIcon; // 보스 아이콘
 
     [Header("난이도별 스펙 정보")]
     // 인스펙터 노출용, CSV 파싱 데이터를 저장

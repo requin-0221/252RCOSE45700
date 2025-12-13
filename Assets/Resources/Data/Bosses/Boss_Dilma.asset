@@ -14,28 +14,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossData
   bossName: "\uB51C\uB9C8"
   bossSprite: {fileID: 21300000, guid: 84059c2380a6a7a42b5d7be27c29b409, type: 3}
+  bossIcon: {fileID: 450153661903980274, guid: 64496b08c59dc9b43b738f396ac4e6ad, type: 3}
   difficultyList:
   - difficulty: 0
     spec:
       maxHp: 500000
       maxShield: 0
-      atk: 0
-      def: 1000
+      atk: 1000
+      def: 0
       goldReward: 50000
       stoneReward: 200
+      minTier: 1
+      maxTier: 3
+      dropRate: 60
+      dropCount: 5
   - difficulty: 1
     spec:
-      maxHp: 3000000
+      maxHp: 6000000
       maxShield: 0
-      atk: 100
-      def: 2000
+      atk: 2000
+      def: 100
       goldReward: 200000
       stoneReward: 800
+      minTier: 2
+      maxTier: 3
+      dropRate: 60
+      dropCount: 6
   - difficulty: 2
     spec:
       maxHp: 300000000
       maxShield: 100000000
-      atk: 400
-      def: 5000
+      atk: 5000
+      def: 400
       goldReward: 2400000
       stoneReward: 6000
+      minTier: 4
+      maxTier: 7
+      dropRate: 40
+      dropCount: 10

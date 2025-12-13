@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6748362785038052903}
   - component: {fileID: 5682926050358343225}
+  - component: {fileID: 4832627892573534900}
   m_Layer: 0
   m_Name: BossManager
   m_TagString: Untagged
@@ -45,6 +46,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossManager
   difficulty: 0
+  dropManager: {fileID: 0}
   _bossList:
   - {fileID: 11400000, guid: c9ca890d097163740881090e9fb76e15, type: 2}
   - {fileID: 11400000, guid: acc68e2ede761a64a92bbc77b7c73f09, type: 2}
+  clearList: []
+--- !u!114 &4832627892573534900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4710091517308691382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67bbc84c26e2764b9efeef68997e6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DropManager
+  allItems:
+  - {fileID: 11400000, guid: 0d415208c89307c43bdcbf98361d5e65, type: 2}
+  - {fileID: 11400000, guid: 40f2f6cd3592bbd4fa1bb8114afd6f2b, type: 2}
+  - {fileID: 11400000, guid: 6731aff64c93fc440b3abe8931d08f89, type: 2}
+  - {fileID: 11400000, guid: d02c0b16352e2ac47adfd3acaa3010e3, type: 2}
+  - {fileID: 11400000, guid: 6942bae08ba77434a9f69710bfa6667f, type: 2}
+  - {fileID: 11400000, guid: 437746d0f9484a24bb4af2deb715ea74, type: 2}
+  - {fileID: 11400000, guid: e58dada46dc9f144a8f35b3c5aae1963, type: 2}
+  - {fileID: 11400000, guid: d13c915f408e67847983b6ff31d29bb9, type: 2}

@@ -25,6 +25,8 @@ public class StatusUI : MonoBehaviour
 
     public void UpdateUI()
     {
+        if (PlayerStat.Instance == null) return;
+
         int lineIdx = 0;
         string temp = null;
         bool isPhysicalAttack = PlayerStat.Instance.FinalAttackType == AttackType.Physical;

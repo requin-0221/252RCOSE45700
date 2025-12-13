@@ -13,6 +13,7 @@ public class BossDataImporter : EditorWindow
     // 스프라이트 검색을 위한 폴더 (전체 검색은 느릴 수 있으므로 범위 지정 추천)
     // 비워두면 프로젝트 전체에서 검색합니다.
     private string spriteRootFolder = "Assets/Sprites/Boss";
+    private string iconRootFolder = "Assets/Sprites/Boss/Icons";
 
     [MenuItem("Tools/Import Boss Data")]
     public static void ShowWindow()
@@ -31,7 +32,8 @@ public class BossDataImporter : EditorWindow
         spriteRootFolder = EditorGUILayout.TextField("Sprite Search Folder", spriteRootFolder);
 
         EditorGUILayout.Space();
-        EditorGUILayout.HelpBox("CSV 구조: Name, Sprite, Difficulty, Hp, Shield, Atk, Def, GoldReward, StoneReward", MessageType.Info);
+        EditorGUILayout.HelpBox("CSV 구조: Name, Sprite, Difficulty, Hp, Shield, Atk, Def, GoldReward, StoneReward," +
+            " ItemMinTier, ItemMaxTier, DropRate, DropCount", MessageType.Info);
 
         if (GUILayout.Button("Import Boss Data", GUILayout.Height(40)))
         {
@@ -75,7 +77,6 @@ public class BossDataImporter : EditorWindow
             string[] row = line.Split(',');
 
             // CSV 컬럼 파싱
-            // 0:Name, 1:Sprite, 2:Difficulty, 3:Hp, 4:Shield, 5:Atk, 6:Def, 7:GoldReward, 8:StoneReward
             try
             {
                 string bossName = row[0].Trim();
@@ -90,10 +91,14 @@ public class BossDataImporter : EditorWindow
                 {
                     maxHp = ParseLongS(row[3]),
                     maxShield = ParseLongS(row[4]),
-                    atk = ParseLongS(row[5]),
-                    def = ParseLongS(row[6]),
+                    atk = ParseIntS(row[5]),
+                    def = ParseIntS(row[6]),
                     goldReward = ParseLongS(row[7]),
-                    stoneReward = ParseLongS(row[8])
+                    stoneReward = ParseLongS(row[8]),
+                    minTier = ParseIntS(row[9]),
+                    maxTier = ParseIntS(row[10]),
+                    dropRate = ParsefloatS(row[11]),
+                    dropCount = ParseIntS(row[12])
                 };
 
                 // SO 생성 또는 로드 및 데이터 주입
@@ -128,6 +133,19 @@ public class BossDataImporter : EditorWindow
         }
 
         // 스프라이트 연결
+        string iconName = "sprIcon" + spriteName;
+        if (bossSO.bossIcon == null || bossSO.bossIcon.name != iconName)
+        {
+            Sprite spr = FindIconByName(iconName);
+            if (spr != null)
+            {
+                bossSO.bossIcon = spr;
+            }
+            else
+            {
+                Debug.LogWarning($"[{bossName}] 아이콘을 찾을 수 없습니다: {iconName}");
+            }
+        }
         spriteName = "spr" + spriteName;
         if (bossSO.bossSprite == null || bossSO.bossSprite.name != spriteName)
         {
@@ -172,6 +190,30 @@ public class BossDataImporter : EditorWindow
         return null;
     }
 
+    private Sprite FindIconByName(string spriteName)
+    {
+        string[] guids;
+
+        // 검색 범위 지정 (속도 향상)
+        if (!string.IsNullOrEmpty(iconRootFolder) && Directory.Exists(iconRootFolder))
+        {
+            guids = AssetDatabase.FindAssets($"{spriteName} t:Sprite", new[] { iconRootFolder });
+        }
+        else
+        {
+            guids = AssetDatabase.FindAssets($"{spriteName} t:Sprite");
+        }
+
+        if (guids.Length > 0)
+        {
+            // 첫 번째 검색 결과 반환
+            string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+            return AssetDatabase.LoadAssetAtPath<Sprite>(path);
+        }
+
+        return null;
+    }
+
     private long ParseLongS(string value)
     {
         // 문자열이 비어있거나 공백만 있는 경우 0 반환
@@ -184,5 +226,33 @@ public class BossDataImporter : EditorWindow
             return result;
         }
         return 0;
+    }
+
+    private int ParseIntS(string value)
+    {
+        // 문자열이 비어있거나 공백만 있는 경우 0 반환
+        if (string.IsNullOrWhiteSpace(value))
+            return 0;
+
+        // 파싱 시도 (숫자가 아닌 이상한 문자열이 섞여 있어도 0으로 처리하여 에러 방지)
+        if (int.TryParse(value, out int result))
+        {
+            return result;
+        }
+        return 0;
+    }
+
+    private float ParsefloatS(string value)
+    {
+        // 문자열이 비어있거나 공백만 있는 경우 0 반환
+        if (string.IsNullOrWhiteSpace(value))
+            return 0;
+
+        // 파싱 시도 (숫자가 아닌 이상한 문자열이 섞여 있어도 0으로 처리하여 에러 방지)
+        if (float.TryParse(value, out float result))
+        {
+            return result;
+        }
+        return 0f;
     }
 }

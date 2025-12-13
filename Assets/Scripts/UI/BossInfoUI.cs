@@ -142,24 +142,29 @@ public class BossInfoUI : MonoBehaviour
     void OnClickDifficultyButton(BossDifficulty difficulty)
     {
         BossManager.Instance.SetDifficulty(difficulty);
-        UpdateUI();
+        UIManager.Instance.RefreshAllUI();
     }
 
     public void OnClickNextBoss()
     {
         BossManager.Instance.SetCurrentBossID(BossManager.Instance.currBossID + 1);
-        UpdateUI(); // 데이터가 바뀌었으니 화면 갱신
+        UIManager.Instance.RefreshAllUI();
     }
 
     public void OnClickPrevBoss()
     {
         BossManager.Instance.SetCurrentBossID(BossManager.Instance.currBossID - 1);
-        UpdateUI();
+        UIManager.Instance.RefreshAllUI();
     }
 
     public void OnClickBattleButton()
     {
         Debug.Log("보스 전투 진입");
-        //UnityEngine.SceneManagement.SceneManager.LoadScene("BossBattleScene");
+        if (UIManager.Instance.sceneTransition == null)
+        {
+            Debug.Log("No scene transition");
+            return;
+        }
+        UIManager.Instance.sceneTransition.StartFadeOut("BossScene");
     }
 }

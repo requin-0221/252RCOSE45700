@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class UIManager : MonoBehaviour
 {
@@ -29,6 +28,9 @@ public class UIManager : MonoBehaviour
     [Header("Prefab")]
     public GameObject messageGroupPrefab; // 인스펙터에서 할당
     public Transform popupParent;         // 팝업이 생성될 Canvas
+
+    [Header("Scene Transition")]
+    public SceneTransition sceneTransition;
 
     [Header("Tier Colors")]
     [SerializeField] private List<Color> _tierColorList;
@@ -123,11 +125,11 @@ public class UIManager : MonoBehaviour
         if (resourceUI != null) resourceUI.UpdateUI();
     }
 
-    public void ShowPopup(string message, Action callback = null, string btnTxt = "확인", string title = "Message")
+    public void ShowPopup(string message, Action btn_callback = null, Action close_callback = null, string btnTxt = "확인", string title = "Message")
     {
         GameObject obj = Instantiate(messageGroupPrefab, popupParent);
         MessageUI popup = obj.GetComponent<MessageUI>();
-        popup.Setup(message, callback, btnTxt, title);
+        popup.Setup(message, btn_callback, close_callback, btnTxt, title);
     }
 
     public void ShowUpgradeUI()

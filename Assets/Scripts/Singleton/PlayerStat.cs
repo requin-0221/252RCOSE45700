@@ -72,7 +72,7 @@ public class PlayerStat : MonoBehaviour
         FinalPDmgPercent = totalStats[(int)StatType.PDmgPercent];
         FinalMDmgPercent = totalStats[(int)StatType.MDmgPercent];
         FinalDmgPercent = totalStats[(int)StatType.DmgPercent];
-        FinalCriDmgPercent = totalStats[(int)StatType.CriDmgPercent];
+        FinalCriDmgPercent = 30f + totalStats[(int)StatType.CriDmgPercent];
         FinalItemDropPercent = totalStats[(int)StatType.ItemDropPercent];
         FinalGoldDropPercent = totalStats[(int)StatType.GoldDropPercent];
         FinalCriRate = StarToCriRate(totalStats[(int)StatType.CriRateStar]);
@@ -121,6 +121,16 @@ public class PlayerStat : MonoBehaviour
         FinalCriRate = 15f;
         FinalDefPntr = 0f;
         FinalSkillDmg = 300f;
+    }
+
+    public int GetFinalAtk()
+    {
+        return FinalAttackType == AttackType.Physical ? FinalPAtk : FinalMAtk;
+    }
+
+    public float GetFinalBonusDmgPercent()
+    {
+        return FinalAttackType == AttackType.Physical ? (FinalPDmgPercent+FinalDmgPercent) : (FinalMDmgPercent+FinalDmgPercent);
     }
 
     private float StarToCriRate(float starValue)

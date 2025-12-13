@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2605726578233460832}
   - component: {fileID: 4697743577567332192}
+  - component: {fileID: 5099613265834881737}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -44,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f74aca4a9c9841643a8b70638c21610a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  isInventoryMode: 1
   inventoryUI: {fileID: 0}
   itemInfo: {fileID: 0}
   resourceUI: {fileID: 0}
@@ -52,12 +52,15 @@ MonoBehaviour:
   statusUI: {fileID: 0}
   upgradeUI: {fileID: 0}
   growthUI: {fileID: 0}
+  bossInfoUI: {fileID: 0}
+  rewardInfoUI: {fileID: 0}
   changeLayoutButton: {fileID: 0}
   changeLayoutButton_inventory: {fileID: 449267543999617272, guid: 32d746028691a1e49a9331b220c4ffbf, type: 3}
   changeLayoutButton_battle: {fileID: 3418393454829847516, guid: 9cebd0d646bf0e1479aec1e296119032, type: 3}
   backgroundYellow: {fileID: 0}
   messageGroupPrefab: {fileID: 7554818893794986244, guid: c6474172898557c4bb7ab917f8e982a7, type: 3}
   popupParent: {fileID: 0}
+  sceneTransition: {fileID: 5099613265834881737}
   _tierColorList:
   - {r: 0.49803922, g: 0.49803922, b: 0.49803922, a: 1}
   - {r: 0.49803922, g: 0.49803922, b: 0.49803922, a: 1}
@@ -118,3 +121,19 @@ MonoBehaviour:
     name: "\uC544\uC774\uD15C \uD68D\uB4DD%"
   - statType: 15
     name: "\uC7AC\uD654 \uD68D\uB4DD%"
+--- !u!114 &5099613265834881737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8443570756488082349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26833352a170b6640adeed06d6f67369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneTransition
+  nextScene: 
+  fadeImage: {fileID: 0}
+  fadeInDuration: 1
+  fadeOutDuration: 1
