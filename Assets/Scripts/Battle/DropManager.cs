@@ -17,10 +17,12 @@ public class DropManager : MonoBehaviour
 
         if (candidates.Count == 0) return result;
 
+        if (PlayerStat.Instance != null) dropChance *= (1f + PlayerStat.Instance.FinalItemDropPercent * 0.01f);
+
         // 최대 획득 가능 개수만큼 반복
         for (int i = 0; i < count; i++)
         {
-            if (Random.value > dropChance)
+            if (Random.value > dropChance * 0.01f)
             {
                 continue;
             }

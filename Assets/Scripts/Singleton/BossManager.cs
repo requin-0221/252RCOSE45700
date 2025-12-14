@@ -107,8 +107,17 @@ public class BossManager : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.AddGold(dict.goldReward * (isFirst ? 5 : 1));
-            GameManager.Instance.AddStone((int)dict.stoneReward * (isFirst ? 5 : 1));
+            long gold = dict.goldReward * (isFirst ? 5 : 1);
+            long stone = dict.stoneReward * (isFirst ? 5 : 1);
+
+            if (PlayerStat.Instance != null)
+            {
+                gold = (long)Mathf.Floor(gold * (1f + PlayerStat.Instance.FinalGoldDropPercent));
+                stone = (long)Mathf.Floor(stone * (1f + PlayerStat.Instance.FinalGoldDropPercent));
+            }
+
+            GameManager.Instance.AddGold(gold);
+            GameManager.Instance.AddStone((int)stone);
         }
 
         if (dropManager != null && InventoryManager.Instance != null)
